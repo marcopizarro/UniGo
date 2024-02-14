@@ -4,16 +4,25 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import Login from './Login';
 import { styles } from './StyleSheet';
+import WaitingMatchDriverScreen from './WaitingMatchDriverScreen';
+import PickupScreen from './PickupScreen';
+import DestinationScreen from './DestinationScreen';
+import WelcomeScreen from './WelcomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 export default function App() {
   const [signedIn, setSignedIn] = useState(false);
+  const [status, setStatus] = useState(0);
+  const Stack = createNativeStackNavigator();
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       const uid = user.uid;
       setSignedIn(true);
-      // ...
     } else {
       setSignedIn(false);
 
@@ -29,16 +38,23 @@ export default function App() {
   }
 
   return (
-    signedIn ? (
-      <View style={styles.container}>
-        <Text onPress={handleSignOut} style={[styles.text, { color: 'gray' }]}>Signed In, Press This to Sign Out</Text>
-      </View>
-    ) : (
-      <>
-        <View style={styles.container}>
-          <Login />
-        </View>
-      </>
-    ));
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {signedIn ? (
+          <>
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <Stack.Screen name="PickupScreen" component={PickupScreen} />
+            <Stack.Screen name="DestinationScreen" component={DestinationScreen} />
+            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+
 
 }

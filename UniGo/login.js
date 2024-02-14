@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app, auth } from './firebaseConfig';
 import { styles } from './StyleSheet';
@@ -77,12 +77,12 @@ export default function Login() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+      </Pressable>
+      <Pressable style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+      </Pressable>
       <Text onPress={handleForgotPassword} style={[styles.text, { color: 'gray' }]}>Forgot your password?</Text>
       {error != null &&
         <Text style={[styles.text, { color: 'red' }]}>{error}</Text>
