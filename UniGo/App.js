@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { styles } from './styleSheet';
-import Login from './Login';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
+import Login from './login';
+import { styles } from './styleSheet';
 
 export default function App() {
   const [signedIn, setSignedIn] = useState(false);
