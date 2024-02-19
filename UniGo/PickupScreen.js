@@ -11,23 +11,26 @@ export default function PickupScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TextInput
-              style={styles.input}
-              placeholder="Type in pickup location"
-              textAlign='center'
-            />
- 
+      <TextInput
+        style={styles.input}
+        placeholder="Type in pickup location"
+        textAlign='center'
+        value={pickup}
+        onChangeText={setPickup}
+      />
+
       <Text> OR</Text>
 
       <TouchableOpacity
-      style={styles.button}
+        style={styles.button}
       >
         <Text style={styles.buttonText}>Get current location</Text>
       </TouchableOpacity>
 
-      
-      <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('DestinationScreen')} >
-      <Text style={styles.submitbuttonText}>Submit</Text>
+
+      <TouchableOpacity style={styles.submitButton}
+        onPress={() => navigation.navigate('DestinationScreen', { pickup })} >
+        <Text style={styles.submitbuttonText}>Submit</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { styles } from './StyleSheet'; // Adjust the path to your styles file
+import { styles } from './StyleSheet';
 import { Button } from 'react-native';
 import { db } from './firebaseConfig';
 import { addDoc, collection } from 'firebase/firestore';
 import { auth } from './firebaseConfig';
 
-export default function WaitingMatchDriverScreen({ navigation }) {
+export default function WaitingMatchDriverScreen({ route, navigation }) {
   const [status, setStatus] = useState(0);
   const handleSubmit = () => {
     console.log('Submit');
@@ -16,8 +16,8 @@ export default function WaitingMatchDriverScreen({ navigation }) {
     try {
       const docRef = addDoc(collection(db, "rideRequests"), {
         user: auth.currentUser.uid,
-        pickupLoc: "pickup",
-        destinationLoc: "destination",
+        pickupLoc: route.params.pickup,
+        destinationLoc: route.params.destination,
         rider: status,
         time: new Date(),
         status: "waiting"
