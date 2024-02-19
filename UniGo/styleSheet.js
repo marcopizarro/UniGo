@@ -20,14 +20,17 @@ export const styles = StyleSheet.create({
   },
   input: {
     width: '80%',
-    fontSize: 18,
+    fontSize: 14,
     padding: 10,
     borderBottomWidth: 1,
     borderColor: 'gray',
     marginBottom: 20,
+    textAlign:'center'
   },
   button: {
-    backgroundColor: '#746CC7',
+    backgroundColor: '#E4E6F9',
+    borderColor: 'black',
+    borderWidth: 1,
     padding: 15,
     borderRadius: 5,
     width: '80%',
@@ -35,8 +38,25 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   buttonText: {
+    color: 'black',
+    fontSize: 18,
+  },
+  submitButton: {
+    backgroundColor: 'black', borderColor: 'black', borderWidth: 1, borderRadius: 5, padding:5, margin:10
+  },
+  submitbuttonText: {
     color: 'white',
     fontSize: 18,
+  },
+  requestbutton: {
+    backgroundColor: '#736CC1',
+    borderColor: 'black',
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 15,
+    width: '50%',
+    alignItems: 'center',
+    margin: 10,
   },
 });
 

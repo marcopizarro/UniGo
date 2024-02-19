@@ -9,9 +9,19 @@ export default function WaitingMatchDriverScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Waiting to be matched ... </Text>
       <Text>How are things going?</Text>
-      <Button title="Not too well, ASAP needed" />
-      <Button title="All ok, the faster the better" />
-      <Button title="No rush" />
+      <TouchableOpacity style={styles.button} >
+      <Text style={styles.buttonText}>Not too well, ASAP needed</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} >
+      <Text style={styles.buttonText}>All ok, the faster the better</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} >
+      <Text style={styles.buttonText}>No rush</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.submitButton} >
+      <Text style={styles.submitbuttonText}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 }
