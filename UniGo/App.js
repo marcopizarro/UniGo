@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import Login from './login';
-import { styles } from './StyleSheet';
+import { styles } from './styleSheet';
 import WaitingMatchDriverScreen from './WaitingMatchDriverScreen';
 import PickupScreen from './PickupScreen';
 import DestinationScreen from './DestinationScreen';
