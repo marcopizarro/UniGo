@@ -10,7 +10,7 @@ export default function DestinationScreen({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={ {flexDirection: "row", padding:70}}>
 
       <TextInput
         style={styles.input}
@@ -18,8 +18,8 @@ export default function DestinationScreen({ navigation }) {
         value={destination}
         onChangeText={setDestination}
       />
-      <TouchableOpacity style={styles.button} onPress={handleDestination}>
-        <Text style={styles.buttonText}>Submit</Text>
+      <TouchableOpacity style={styles.submitButton} onPress={handleDestination}>
+        <Text style={styles.submitbuttonText}>Submit</Text>
       </TouchableOpacity>
     </View>
   );

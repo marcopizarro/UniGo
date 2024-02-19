@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './Login';
+import Login from './login';
 import { styles } from './StyleSheet';
 import WaitingMatchDriverScreen from './WaitingMatchDriverScreen';
 import PickupScreen from './PickupScreen';
@@ -39,13 +39,53 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: true }}>
         {signedIn ? (
           <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            <Stack.Screen name="PickupScreen" component={PickupScreen} />
-            <Stack.Screen name="DestinationScreen" component={DestinationScreen} />
-            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen} />
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} 
+            options={{
+              title: 'UniGo',
+              headerStyle: {
+                backgroundColor: '#95A2F1',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}/>
+            <Stack.Screen name="PickupScreen" component={PickupScreen} 
+            options={{
+              title: 'UniGo',
+              headerStyle: {
+                backgroundColor: '#95A2F1',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}/>
+            <Stack.Screen name="DestinationScreen" component={DestinationScreen} 
+            options={{
+              title: 'UniGo',
+              headerStyle: {
+                backgroundColor: '#95A2F1',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}/>
+            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen} 
+            options={{
+              title: 'UniGo',
+              headerStyle: {
+                backgroundColor: '#95A2F1',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}/>
           </>
         ) : (
           <>
