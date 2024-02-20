@@ -39,6 +39,7 @@ export default function PickupScreen() {
     });
   };
 
+
   return ( 
 
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
@@ -90,3 +91,4 @@ export default function PickupScreen() {
 } 
 
  
+

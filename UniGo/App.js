@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './login';
+import Login from './Login';
 import { styles } from './StyleSheet';
 import WaitingMatchDriverScreen from './WaitingMatchDriverScreen';
 import PickupScreen from './PickupScreen';
@@ -10,6 +10,7 @@ import DestinationScreen from './DestinationScreen';
 import WelcomeScreen from './WelcomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import 'expo-dev-menu';
 
 
 export default function App() {
@@ -25,7 +26,6 @@ export default function App() {
       setSignedIn(true);
     } else {
       setSignedIn(false);
-
     }
   });
 
@@ -42,50 +42,50 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: true }}>
         {signedIn ? (
           <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} 
-            options={{
-              title: 'UniGo',
-              headerStyle: {
-                backgroundColor: '#95A2F1',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}/>
-            <Stack.Screen name="PickupScreen" component={PickupScreen} 
-            options={{
-              title: 'UniGo',
-              headerStyle: {
-                backgroundColor: '#95A2F1',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}/>
-            <Stack.Screen name="DestinationScreen" component={DestinationScreen} 
-            options={{
-              title: 'UniGo',
-              headerStyle: {
-                backgroundColor: '#95A2F1',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}/>
-            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen} 
-            options={{
-              title: 'UniGo',
-              headerStyle: {
-                backgroundColor: '#95A2F1',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}/>
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen}
+              options={{
+                title: 'UniGo',
+                headerStyle: {
+                  backgroundColor: '#95A2F1',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }} />
+            <Stack.Screen name="PickupScreen" component={PickupScreen}
+              options={{
+                title: 'UniGo',
+                headerStyle: {
+                  backgroundColor: '#95A2F1',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }} />
+            <Stack.Screen name="DestinationScreen" component={DestinationScreen}
+              options={{
+                title: 'UniGo',
+                headerStyle: {
+                  backgroundColor: '#95A2F1',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }} />
+            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen}
+              options={{
+                title: 'UniGo',
+                headerStyle: {
+                  backgroundColor: '#95A2F1',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }} />
           </>
         ) : (
           <>

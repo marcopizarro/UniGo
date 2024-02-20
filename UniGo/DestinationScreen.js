@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 
+
+
 const destinations = {
   'Toyon' : {latitude : 37.42612149402934, longitude : -122.16339823054155}, 
   'EVGR A' : {latitude : 37.424602763750606, longitude : -122.15899543978708}, 
@@ -33,6 +35,13 @@ export default function DestinationScreen({ route, navigation }) {
     navigation.navigate('WaitingMatchDriverScreen', { pickup : pickup, destination: destinations[destination] });
     // passing the coordinates of pickup and destination
   };
+
+
+
+
+
+
+
 
   return (
     <View style={ {flexDirection: "column", padding:70}}>
