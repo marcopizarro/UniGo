@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 
-export default function DestinationScreen({ navigation }) {
+export default function DestinationScreen({ route, navigation }) {
   const [destination, setDestination] = useState('');
   const handleDestination = () => {
     console.log('Destination', { destination });
-    navigation.navigate('WaitingMatchDriverScreen');
+    navigation.navigate('WaitingMatchDriverScreen', { pickup: route.params.pickup, destination });
   };
 
   return (
-    <View style={ {flexDirection: "row", padding:70}}>
+    <View style={{ flexDirection: "row", padding: 70 }}>
 
       <TextInput
         style={styles.input}
