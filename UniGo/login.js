@@ -3,6 +3,7 @@ import { Text, TextInput, Pressable, View } from 'react-native';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app, auth } from './firebaseConfig';
 import { styles } from './StyleSheet';
+import { Image } from 'react-native';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -61,7 +62,13 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to UniGo</Text>
+      <Text style={styles.title}>Welcome!</Text>
+      <Image
+              source={require('./assets/logo.png')} // Make sure to replace './path/to/your/logo.png' with the actual path to your logo image
+              style={{ width: 300, height: 200, marginBottom: 30 }} // Adjust the size of your logo as needed
+              resizeMode= "contain"
+              
+            />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -80,8 +87,8 @@ export default function Login() {
       <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+      <Pressable style={styles.submitButton} onPress={handleSignUp}>
+        <Text style={styles.submitButtonText}>Sign Up</Text>
       </Pressable>
       <Text onPress={handleForgotPassword} style={[styles.text, { color: 'gray' }]}>Forgot your password?</Text>
       {error != null &&

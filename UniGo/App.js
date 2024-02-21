@@ -4,12 +4,14 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import Login from './Login';
 import { styles } from './StyleSheet';
-import WaitingMatchDriverScreen from './WaitingMatchDriverScreen';
+import WaitingToBeMatched from './WaitingToBeMatched';
+import AreYouOk from './AreYouOk';
 import PickupScreen from './PickupScreen';
 import DestinationScreen from './DestinationScreen';
 import WelcomeScreen from './WelcomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Image } from 'react-native';
 import 'expo-dev-menu';
 
 
@@ -39,62 +41,37 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: true }}>
+      <Stack.Navigator
+         screenOptions={{
+          headerShown: true,
+          headerTitle: () => (
+            <Image
+              source={require('./assets/logo.png')} 
+              style={{ width: 200, height: 100, align: 'center' }} 
+              resizeMode= "contain"
+            />
+          ),
+          headerTitleAlign: 'center', // This will center the title text
+          headerStyle: {
+            backgroundColor: '#95A2F1',
+            height: 400, // Adjusted for a reasonable height
+          },
+          headerTintColor: '#fff',
+        
+        }}
+      >
         {signedIn ? (
           <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen}
-              options={{
-                title: 'UniGo',
-                headerStyle: {
-                  backgroundColor: '#95A2F1',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }} />
-            <Stack.Screen name="PickupScreen" component={PickupScreen}
-              options={{
-                title: 'UniGo',
-                headerStyle: {
-                  backgroundColor: '#95A2F1',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }} />
-            <Stack.Screen name="DestinationScreen" component={DestinationScreen}
-              options={{
-                title: 'UniGo',
-                headerStyle: {
-                  backgroundColor: '#95A2F1',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }} />
-            <Stack.Screen name="WaitingMatchDriverScreen" component={WaitingMatchDriverScreen}
-              options={{
-                title: 'UniGo',
-                headerStyle: {
-                  backgroundColor: '#95A2F1',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }} />
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <Stack.Screen name="PickupScreen" component={PickupScreen} />
+            <Stack.Screen name="DestinationScreen" component={DestinationScreen} />
+            <Stack.Screen name="AreYouOk" component={AreYouOk} />
+            <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
           </>
         ) : (
-          <>
-            <Stack.Screen name="Login" component={Login} />
-          </>
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
-
-
 }
