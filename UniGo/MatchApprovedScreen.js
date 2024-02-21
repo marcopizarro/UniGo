@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { styles } from './StyleSheet';
 
 
-export default function MatchApproved() {
+export default function MatchApproved({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>You have been matched with a Driver!</Text>

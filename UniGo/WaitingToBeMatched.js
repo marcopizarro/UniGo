@@ -3,12 +3,18 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { Button } from 'react-native';
 
-export default function WaitingToBeMatched({ navigation }) {
+export default function WaitingToBeMatched({ route, navigation }) {
+
+  const { pickup, destination } = route.params; 
 
     return(
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ color: 'black', fontSize: 20, fontWeight: 'semibold', marginBottom: 30, padding: 20 }}>Thank you for letting us know!</Text>
-          <Text style={{ color: '#736CC1', fontSize: 30, fontWeight: 'bold', marginBottom: 80, padding: 20 }}>Your hero for the night it being called..</Text>
+          <Text style={{ color: '#736CC1', fontSize: 30, fontWeight: 'bold', marginBottom: 80, padding: 20 }}>Your hero for the night is being called..</Text>
+          <Button 
+            title="Pretend you've matched"
+            onPress={() => navigation.navigate('WaitingForDriverScreen', { pickup : pickup, destination: destination })}
+          />
         </View>
       );
 

@@ -9,6 +9,11 @@ import AreYouOk from './AreYouOk';
 import PickupScreen from './PickupScreen';
 import DestinationScreen from './DestinationScreen';
 import WelcomeScreen from './WelcomeScreen';
+import ConfirmDestScreen from './ConfirmDestScreen';
+import DrivingHomeScreen from './DrivingHomeScreen';
+import MatchApprovedScreen from './MatchApprovedScreen';
+import WaitingForDriverScreen from './WaitingForDriverScreen';
+import RideCompletedScreen from './RideCompletedScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
@@ -67,6 +72,10 @@ export default function App() {
             <Stack.Screen name="DestinationScreen" component={DestinationScreen} />
             <Stack.Screen name="AreYouOk" component={AreYouOk} />
             <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
+            <Stack.Screen name="MatchApprovedScreen" component={MatchApprovedScreen} />
+            <Stack.Screen name="WaitingForDriverScreen" component={WaitingForDriverScreen} />
+            <Stack.Screen name="DrivingHomeScreen" component={DrivingHomeScreen} />
+            <Stack.Screen name="RideCompletedScreen" component={RideCompletedScreen} />
           </>
         ) : (
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />

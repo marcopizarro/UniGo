@@ -5,9 +5,10 @@ import * as Location from 'expo-location';
 import { styles } from './StyleSheet';
 
 
-export default function DriverArrives() {
+export default function WaitingForDriverScreen({route, navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { pickup, destination } = route.params; 
 
   const onUserLocationChange = (e) => {
     console.log(e.nativeEvent.coordinate.latitude);
@@ -28,15 +29,15 @@ export default function DriverArrives() {
     getPermissions();
   }, []);
 
-  if (location !== null) {
+  if (route !== null) {
     return (
       <View style={styles.container}>
         <MapView
           style={styles.map}
           mapType="mutedStandard"
-          initialRegion={{latitude: 37.42753514520058, //need to pull driver location
+          initialRegion={{latitude: pickup.latitude, //need to pull driver location
                           latitudeDelta: .01, //should make this variable with destination and origin locations being determining factors
-                          longitude: -122.16199162706553,
+                          longitude: pickup.longitude,
                           longitudeDelta: .01 //should make this variable with destination and origin locations being determining factors
                         }}
           showsUserLocation='true'
@@ -44,8 +45,8 @@ export default function DriverArrives() {
         >
           <Marker
             coordinate={{
-              latitude: 37.42994872713819,
-              longitude: -122.16937618578491
+              latitude: destination.latitude,
+              longitude: destination.longitude
             }}
             title="Destination"
           />
@@ -64,8 +65,11 @@ export default function DriverArrives() {
             />
           </Marker>
         </MapView>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Cancel Request</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('DrivingHomeScreen', { pickup : pickup, destination: destination })}
+          >
+          <Text style={styles.buttonText}>Driver arrives</Text>
         </TouchableOpacity>
       </View>
     );

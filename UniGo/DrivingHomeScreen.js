@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { styles } from './StyleSheet'
+import { TouchableOpacity } from 'react-native';
 
 
-export default function DriverArrives() {
+export default function DrivingHomeScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { pickup, destination } = route.params; 
 
   const onUserLocationChange = (e) => {
     console.log(e.nativeEvent.coordinate.latitude);
@@ -28,15 +30,16 @@ export default function DriverArrives() {
     getPermissions();
   }, []);
 
+
   if (location !== null) {
     return (
       <View style={styles.container}>
         <MapView
           style={styles.map}
           mapType="mutedStandard"
-          initialRegion={{latitude: 37.42753514520058, //need to pull driver location
+          initialRegion={{latitude: destination.latitude, //need to pull driver location
                           latitudeDelta: .01, //should make this a function of origin and destination locations
-                          longitude: -122.16199162706553, //need to pull driver location
+                          longitude: destination.longitude, //need to pull driver location
                           longitudeDelta: .01 //should make this a function of origin and destination locations
                         }}
           showsUserLocation='true'
@@ -44,8 +47,8 @@ export default function DriverArrives() {
         >
           <Marker
             coordinate={{
-              latitude: 37.42994872713819,
-              longitude: -122.16937618578491
+              latitude: destination.latitude,
+              longitude: destination.longitude
             }}
             title="Destination"
           />
@@ -53,8 +56,8 @@ export default function DriverArrives() {
             //link for icon attribution
             //<a href="https://www.flaticon.com/free-icons/car" title="car icons">Car icons created by Freepik - Flaticon</a>
             coordinate={{
-              latitude: location.latitude , //need to pull driver location
-              longitude: location.longitude
+              latitude: destination.latitude , //need to pull driver location
+              longitude: destination.longitude
             }}
             title="Driver"
           >
@@ -66,6 +69,12 @@ export default function DriverArrives() {
           </Marker>
         </MapView>
         <Text>Your driver is taking you to your destination.</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('RideCompletedScreen')}
+        >
+          <Text style={styles.buttonText}>Complete Ride</Text>
+        </TouchableOpacity>
       </View>
     );
   }

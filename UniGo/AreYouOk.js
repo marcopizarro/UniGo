@@ -3,7 +3,9 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { Button } from 'react-native';
 
-export default function AreYouOk({ navigation }) {
+export default function AreYouOk({ route, navigation }) {
+
+  const { pickup, destination } = route.params; 
   
   const [selectedButton, setSelectedButton] = useState(null);
 
@@ -26,7 +28,7 @@ export default function AreYouOk({ navigation }) {
   const handleSubmit = () => {
     if (selectedButton !== null) {
       // Navigate to the next screen if a button has been selected
-      navigation.navigate('WaitingToBeMatched'); // Replace with your actual next screen name
+      navigation.navigate('WaitingToBeMatched', { pickup : pickup, destination: destination}); // Replace with your actual next screen name
     } else {
       // You can add an alert here if no option is selected
       alert('Please select an option before submitting.');

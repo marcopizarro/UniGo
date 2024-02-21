@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import { styles } from './StyleSheet';
 
 
-export default function DriverArrives() {
+export default function DriverArrives({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
