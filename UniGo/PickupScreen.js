@@ -54,8 +54,6 @@ export default function PickupScreen() {
 
             /> 
 
-  
-
       <Text> OR</Text> 
 
  
