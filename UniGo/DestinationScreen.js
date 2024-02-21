@@ -32,9 +32,16 @@ export default function DestinationScreen({ route, navigation }) {
 
   const handleDestinationSelect = (destination) => {
     setDestination(destination);
-    navigation.navigate('AreYouOk', { pickup : pickup, destination: destinations[destination] });
+    navigation.navigate('WaitingMatchDriverScreen', { pickup : pickup, destination: destinations[destination] });
     // passing the coordinates of pickup and destination
   };
+
+
+
+
+
+
+
 
   return (
     <View style={ {flexDirection: "column", padding:70}}>

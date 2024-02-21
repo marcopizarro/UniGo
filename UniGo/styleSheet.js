@@ -1,6 +1,5 @@
 // AppStyles.js
 import { StyleSheet } from 'react-native';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,68 +13,43 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     marginBottom: 20,
-    color: 'white',
-    fontWeight: 'bold',
   },
-
-  headline1:{
-    fontSize: 25,
-    marginBottom: 60,
-    color: '#95A2F1',
-    fontWeight: 'bold',
-  },
-
   text: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 20,
   },
   input: {
-    backgroundColor: 'white', // Set the background color to white
-    borderRadius: 20, // Add rounded corners. Adjust this value to control the curvature
-    width: 300,
-    padding: 10, // Add some padding inside the text inputs
-    borderWidth: 1, // Optional: add a border
-    borderColor: '#ddd', // Optional: set the border color, light grey for subtle effect
-    marginBottom: 25, // Add some space between the inputs
-    // Additional styles for the "bubble" effect
-    shadowColor: "#000", // Shadow for iOS
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // Shadow for Android
+    width: '80%',
+    fontSize: 14,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 20,
+    textAlign:'center'
   },
-
   button: {
-    backgroundColor: '#E4E6F9', //lighter
+    backgroundColor: '#E4E6F9',
     borderColor: 'black',
     borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    width: '40%',
+    padding: 15,
+    borderRadius: 5,
+    width: '80%',
     alignItems: 'center',
-    margin: 5,
+    margin: 10,
   },
   buttonText: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 18,
   },
   submitButton: {
-    backgroundColor: 'black', 
-    borderColor: 'black', 
-    borderWidth: 1, 
-    borderRadius: 17, 
-    padding:23, 
-    margin:30,
+    backgroundColor: 'black', borderColor: 'black', borderWidth: 1, borderRadius: 5, padding:5, margin:10
   },
-  submitButtonText: {
+  submitbuttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
   },
   requestbutton: {
-    backgroundColor: '#95A2F1',
+    backgroundColor: '#736CC1',
     borderColor: 'black',
     borderWidth: 1,
     padding: 15,
@@ -93,21 +67,5 @@ export const styles = StyleSheet.create({
     height: 50,
     tintColor: '#95A2F1'
   },
-
-  selectedButton: {
-    backgroundColor: '#95A2F1', //darker
-    borderColor: 'black',
-    borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    width: '40%',
-    alignItems: 'center',
-    margin: 5,
-  },
-
-  selectedButtonText: {
-    color: 'white',
-    fontSize: 15,
-  },
-
 });
+
