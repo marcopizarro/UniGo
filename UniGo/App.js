@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './login';
+import Login from './Login';
 import { styles } from './StyleSheet';
 import WaitingToBeMatched from './WaitingToBeMatched';
 import AreYouOk from './AreYouOk';
@@ -12,6 +12,8 @@ import WelcomeScreen from './WelcomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
+import 'expo-dev-menu';
+
 
 export default function App() {
   const [signedIn, setSignedIn] = useState(false);
@@ -26,7 +28,6 @@ export default function App() {
       setSignedIn(true);
     } else {
       setSignedIn(false);
-
     }
   });
 

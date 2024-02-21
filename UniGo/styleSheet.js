@@ -84,6 +84,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
   },
+  map: {
+    height: '80%',
+    width: '100%'
+  },
+  sedanIcon: {
+    width: 50,
+    height: 50,
+    tintColor: '#95A2F1'
+  },
 
   selectedButton: {
     backgroundColor: '#95A2F1', //darker
