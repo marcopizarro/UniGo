@@ -7,8 +7,8 @@ export default function WelcomeScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ color: '#CBC3E3', fontSize: 30 }}>Welcome to UniGo</Text>
-      <Text style={{ color: 'black', fontSize: 15 }}>We are here to get you home safely!</Text>
+      <Text style={{ color: '#736CC1', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>Welcome to UniGo</Text>
+      <Text style={{ color: 'black', fontSize: 20, marginBottom: 20 }}>We are here to get you home safely!</Text>
       <TouchableOpacity
       style={styles.requestbutton}
         onPress={() => navigation.navigate('PickupScreen')}

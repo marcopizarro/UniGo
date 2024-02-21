@@ -6,7 +6,7 @@ export default function DestinationScreen({ navigation }) {
   const [destination, setDestination] = useState('');
   const handleDestination = () => {
     console.log('Destination', { destination });
-    navigation.navigate('WaitingMatchDriverScreen');
+    navigation.navigate('AreYouOk');
   };
 
   return (
@@ -19,7 +19,7 @@ export default function DestinationScreen({ navigation }) {
         onChangeText={setDestination}
       />
       <TouchableOpacity style={styles.submitButton} onPress={handleDestination}>
-        <Text style={styles.submitbuttonText}>Submit</Text>
+        <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
     </View>
   );

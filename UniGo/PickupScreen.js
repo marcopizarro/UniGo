@@ -27,7 +27,7 @@ export default function PickupScreen({ navigation }) {
 
       
       <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('DestinationScreen')} >
-      <Text style={styles.submitbuttonText}>Submit</Text>
+      <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
     </View>
   );
