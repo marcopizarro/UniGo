@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
-import { styles } from './styleSheet';
+import { styles } from './StyleSheet';
 
 
 export default function MatchApproved() {

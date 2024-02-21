@@ -109,5 +109,36 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
   },
+  mapPickup: {
+    height: '50%',
+    width: '100%'
+  },
+  mapWaiting: {
+    height: '30%',
+    width: '100%'
+  },
+  mapOverlay: {
+    position: "absolute",
+    bottom: 50,
+    backgroundColor: '#ffffff',
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 16,
+    left: "25%",
+    width: "50%",
+    textAlign: 'center',
+  },
+
+  submitOverlay: {
+    backgroundColor: 'black', borderColor: 'black', borderWidth: 1, borderRadius: 5, margin:10,
+    position: "absolute",
+    bottom: 50,
+    padding: 16,
+    left: "25%",
+    width: "50%",
+    textAlign: 'center',
+  },
+
+
 
 });

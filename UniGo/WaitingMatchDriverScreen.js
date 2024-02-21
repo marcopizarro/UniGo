@@ -5,6 +5,9 @@ import { Button } from 'react-native';
 import { db } from './firebaseConfig';
 import { addDoc, collection, doc } from 'firebase/firestore';
 import { auth } from './firebaseConfig';
+import MapView from 'react-native-maps';
+
+import { Marker } from 'react-native-maps';
 
 export default function WaitingMatchDriverScreen({ route, navigation }) {
   const [status, setStatus] = useState(0);
@@ -60,6 +63,41 @@ export default function WaitingMatchDriverScreen({ route, navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
+
+
+
+<MapView
+        style={styles.mapWaiting}
+        initialRegion={{latitude: route.params.pickup.latitude, //need to pull driver location
+                        latitudeDelta: .01, //should make this variable with destination and origin locations being determining factors
+                        longitude: route.params.pickup.longitude,
+                        longitudeDelta: .01 //should make this variable with destination and origin locations being determining factors
+                      }}
+      >
+        <Marker
+          coordinate={{
+            latitude: route.params.pickup.latitude,
+            longitude: route.params.pickup.longitude
+          }}
+          title="Pickup"
+        />
+
+        <Marker
+          coordinate={{
+            latitude: route.params.destination.latitude,
+            longitude: route.params.destination.longitude
+          }}
+          title="Dropoff"
+        />
+
+      </MapView>
+
+
+
+
+
+
       <Text>Waiting to be matched ... </Text>
       <Text>How are things going?</Text>
       <TouchableOpacity id="status1" style={styles.button} onPress={() => { setStatus(1), handleSelect(1) }}>
