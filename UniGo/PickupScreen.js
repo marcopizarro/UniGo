@@ -10,7 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import * as Location from 'expo-location';
 
+import MapView from 'react-native-maps';
 
+import { Marker } from 'react-native-maps';
  
 
 export default function PickupScreen() { 
@@ -44,7 +46,7 @@ export default function PickupScreen() {
 
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
 
-            <TextInput 
+           {/*} <TextInput 
 
               style={styles.input} 
 
@@ -54,7 +56,7 @@ export default function PickupScreen() {
 
             /> 
 
-      <Text> OR</Text> 
+  <Text> OR</Text> */}
 
  
 
@@ -64,28 +66,39 @@ export default function PickupScreen() {
 
       </TouchableOpacity> 
 
- 
 
-       
-
-      <TouchableOpacity style={styles.submitButton} onPress={() => {
-          if (pickup) {
-            handlePickup();
-            navigation.navigate('DestinationScreen', {
-              pickup: pickup,
-            });
-          } else {
-            alert('Please use the "Get current location" button to set the pickup location');
-          }}} > 
-
-      <Text style={styles.submitbuttonText}>Submit</Text> 
-
-      </TouchableOpacity> 
-
+      {pickup && 
+                    <MapView
+                    style={styles.map}
+                    mapType="mutedStandard"
+                    initialRegion={{latitude: pickup.latitude, //need to pull driver location
+                                    latitudeDelta: .01, //should make this variable with destination and origin locations being determining factors
+                                    longitude: pickup.longitude,
+                                    longitudeDelta: .01 //should make this variable with destination and origin locations being determining factors
+                                  }}
+                  >
+                    <Marker
+                      coordinate={{
+                        latitude: pickup.latitude,
+                        longitude: pickup.longitude
+                      }}
+                      title="Pickup Location"
+                    />
+                    <TouchableOpacity style={styles.submitOverlay} onPress={() => {
+                      if (pickup) {
+                        handlePickup();
+                        navigation.navigate('DestinationScreen', {
+                          pickup: pickup,
+                        });
+                      } else {
+                        alert('Please use the "Get current location" button to set the pickup location');
+                      }}} > 
+                      <Text style={styles.submitbuttonText}>Submit</Text> 
+                      </TouchableOpacity> 
+                  </MapView>
+      }
     </View> 
-
   ); 
-
 } 
 
  

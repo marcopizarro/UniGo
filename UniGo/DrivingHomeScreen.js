@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { styles } from './styleSheet'
+import { styles } from './StyleSheet'
 
 
 export default function DriverArrives() {

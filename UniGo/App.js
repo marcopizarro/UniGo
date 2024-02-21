@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './Login';
+import Login from './login';
 import { styles } from './StyleSheet';
 import WaitingToBeMatched from './WaitingToBeMatched';
 import AreYouOk from './AreYouOk';
