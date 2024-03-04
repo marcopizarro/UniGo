@@ -1,5 +1,5 @@
 import './App.css';
-import { app, db } from './firebaseConfig';
+import { db } from './firebaseConfig';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
@@ -13,12 +13,37 @@ function App() {
         id: doc.id,
         ...doc.data()
       }));
+      data.sort((a, b) => new Date(a.time.toDate()) - new Date(b.time.toDate()));
       setData(data);
     });
 
     return () => unsubscribe();
   }, []);
 
+  function timeSince(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = seconds / 31536000;
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
   return (
     <div className="App">
       <div style={{ flexDirection: 'row' }}>
@@ -27,9 +52,12 @@ function App() {
           <h2>Current Ride Requests</h2>
           <ul>
             {
-              data.map((request) => {
+              data.map((request, key) => {
                 return <div key={request.id} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', backgroundColor: 'ButtonShadow', marginBottom: '10px' }}>
-                  
+                  <div style={{ flexDirection: 'column', padding: '10px' }}>
+                    <p>riderPriority</p>
+                    <p>{key}</p>
+                  </div>
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>userid</p>
                     <p>{request.id}</p>
@@ -46,9 +74,11 @@ function App() {
                     <p>time of request</p>
                     <p>{request.time.toDate().toDateString()} {request.time.toDate().toLocaleTimeString()}</p>
                   </div>
+                  <div style={{ flexDirection: 'column', padding: '10px' }}>
+                    <p>time waiting</p>
+                    <p>{timeSince(new Date(request.time.toDate()))}</p>
+                  </div>
                 </div>
-
-                // return <li key={request.id}> {request.pickupLoc.latitude}  {request.pickupLoc.longitude} to {request.destinationLoc.latitude}, {request.destinationLoc.longitude} </li>
               })
             }
           </ul>
