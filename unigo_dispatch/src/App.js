@@ -60,7 +60,7 @@ function App() {
                   </div>
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>userid</p>
-                    <p>{request.id}</p>
+                    <p>{request.user}</p>
                   </div>
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>pickup</p>
