@@ -1,6 +1,6 @@
 import './App.css';
 import { db } from './firebaseConfig';
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
+        name: "Unknown",
         ...doc.data()
       }));
       data.sort((a, b) => new Date(a.time.toDate()) - new Date(b.time.toDate()));
@@ -18,6 +19,31 @@ function App() {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    data.forEach(async (request) => {
+      const snap = await getDoc(doc(db, "users", request.user));
+      if (snap.exists()) {
+        console.log(snap.data().name);
+        request.name = snap.data().name;
+      } else {
+        console.log("No such document!");
+        request.name = "Unknown";
+      }
+    }
+    )
+  }, [data]);
+
+
+  // eslint-disable-next-line
+  const [time, setTime] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), 1000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   function timeSince(date) {
@@ -60,7 +86,7 @@ function App() {
                   </div>
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>userid</p>
-                    <p>{request.user}</p>
+                    <p>{request.name}</p>
                   </div>
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>pickup</p>
