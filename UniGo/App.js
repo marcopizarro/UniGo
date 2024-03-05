@@ -52,24 +52,28 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{
-          headerShown: true,
-          headerTitle: () => (
-            <Image
-              source={require('./assets/logo.png')}
-              style={{ width: 200, height: 100, alignSelf: 'center' }}
-              resizeMode="contain"
-            />
-          ),
-          headerTitleAlign: 'center', // This will center the title text
-          headerStyle: {
-            backgroundColor: '#95A2F1',
-            height: 400, // Adjusted for a reasonable height
-          },
-          headerTintColor: '#fff',
-
-        }}
-      >
+           screenOptions={{
+            headerShown: true,
+            headerTitle: () => (
+              <Image
+                source={require('./assets/logo.png')}
+                style={{ width: 100, height: 50 }} // Removed align: 'center' as it's not a valid style property
+                resizeMode="contain"
+              />
+            ),
+            headerTitleAlign: 'center', // This will center the title text
+            headerStyle: {
+              backgroundColor: '#95A2F1',
+              height: 100, // Adjusted for a larger header
+            },
+            headerTintColor: '#fff',
+            headerTitleContainerStyle: {
+              justifyContent: 'center', // Adjust this as necessary to align the title content
+              alignItems: 'center', // Center the title content horizontally
+              height: '100%', // Ensure the container takes full height of the larger header
+            },
+          }}
+        >
         {signedIn ? (
           <>
             <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
