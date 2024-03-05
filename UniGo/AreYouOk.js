@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { Button } from 'react-native';
 import { db } from './firebaseConfig'; // Adjust the path to your firebaseConfig file
@@ -45,7 +45,7 @@ export default function AreYouOk({ route, navigation }) {
         console.error("Error adding document: ", e);
       }
       // Navigate to the next screen if a button has been selected
-      navigation.navigate('WaitingToBeMatched', { pickup: pickup, destination: destination }); // Replace with your actual next screen name
+      navigation.navigate('WaitingToBeMatched', { pickup, destination }); // Replace with your actual next screen name
     } else {
       // You can add an alert here if no option is selected
       alert('Please select an option before submitting.');
@@ -55,24 +55,23 @@ export default function AreYouOk({ route, navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.headline1}>Waiting to be matched...</Text>
-      <Text style={{ color: 'black', fontSize: 20, fontWeight: '500', marginBottom: 15 }}>
-        How are things going?
-      </Text>
+      <Text style={styles.headline1}>Are you in a vulnerable situation?</Text>
 
-      {['notWell', 'ok', 'noRush'].map((buttonKey) => (
-        <TouchableOpacity
-          key={buttonKey}
-          style={getButtonStyle(buttonKey)}
-          onPress={() => handleButtonPress(buttonKey)}
-        >
-          <Text style={getButtonTextStyle(buttonKey)}>
-            {buttonKey === 'notWell' && 'Not too well, ASAP needed'}
-            {buttonKey === 'ok' && 'All ok, the faster the better'}
-            {buttonKey === 'noRush' && 'No rush'}
-          </Text>
-        </TouchableOpacity>
-      ))}
+      {/* Yes Button */}
+      <TouchableOpacity
+        style={getButtonStyle('yes')}
+        onPress={() => handleButtonPress('yes')}
+      >
+        <Text style={getButtonTextStyle('yes')}>Yes</Text>
+      </TouchableOpacity>
+
+      {/* No Button */}
+      <TouchableOpacity
+        style={getButtonStyle('no')}
+        onPress={() => handleButtonPress('no')}
+      >
+        <Text style={getButtonTextStyle('no')}>No</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Submit</Text>
