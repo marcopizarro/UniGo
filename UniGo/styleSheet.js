@@ -1,6 +1,7 @@
 // AppStyles.js
 import { StyleSheet } from 'react-native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -137,6 +138,32 @@ export const styles = StyleSheet.create({
     left: "25%",
     width: "50%",
     textAlign: 'center',
+  },
+
+  LocationsSearchContainer: {
+    position: "absolute",
+    width: "90%",
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 4,
+    padding: 8,
+    borderRadius: 8,
+    top: Constants.statusBarHeight,
+    
+  },
+
+  LocationsButton: {
+    backgroundColor: "black",
+    paddingVertical: 12,
+    marginTop: 16,
+    borderRadius: 4,
+  },
+  LocationsButtonText: {
+    textAlign: "center",
+    color: "white"
   },
 
 
