@@ -14,9 +14,12 @@ import DrivingHomeScreen from './DrivingHomeScreen';
 import MatchApprovedScreen from './MatchApprovedScreen';
 import WaitingForDriverScreen from './WaitingForDriverScreen';
 import RideCompletedScreen from './RideCompletedScreen';
+import LocationsScreen from './LocationsScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
+import Constants from 'expo-constants';
+
 import 'expo-dev-menu';
 
 
@@ -29,6 +32,8 @@ export default function App() {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
+      // <Stack.Screen name="PickupScreen" component={PickupScreen} />
+      // <Stack.Screen name="DestinationScreen" component={DestinationScreen} /> 
       const uid = user.uid;
       setSignedIn(true);
     } else {
@@ -68,8 +73,8 @@ export default function App() {
         {signedIn ? (
           <>
             <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            <Stack.Screen name="PickupScreen" component={PickupScreen} />
-            <Stack.Screen name="DestinationScreen" component={DestinationScreen} />
+            
+            <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
             <Stack.Screen name="AreYouOk" component={AreYouOk} />
             <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
             <Stack.Screen name="MatchApprovedScreen" component={MatchApprovedScreen} />
