@@ -47,13 +47,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-         screenOptions={{
+        screenOptions={{
           headerShown: true,
           headerTitle: () => (
             <Image
-              source={require('./assets/logo.png')} 
-              style={{ width: 200, height: 100, align: 'center' }} 
-              resizeMode= "contain"
+              source={require('./assets/logo.png')}
+              style={{ width: 200, height: 100, alignSelf: 'center' }}
+              resizeMode="contain"
             />
           ),
           headerTitleAlign: 'center', // This will center the title text
@@ -62,7 +62,7 @@ export default function App() {
             height: 400, // Adjusted for a reasonable height
           },
           headerTintColor: '#fff',
-        
+
         }}
       >
         {signedIn ? (

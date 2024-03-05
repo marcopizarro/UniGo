@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app, auth } from './firebaseConfig';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc } from 'firebase/firestore';
+import { app, auth, db } from './firebaseConfig';
 import { styles } from './StyleSheet';
 import { Image } from 'react-native';
 
@@ -47,7 +48,15 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('User signed up', user);
-
+        try {
+          const docRef = setDoc(doc(db, "users", auth.currentUser.uid), {
+            email: email,
+            name: email.split('@')[0],
+          });
+        }
+        catch (e) {
+          console.error("Error adding document: ", e);
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -64,11 +73,11 @@ export default function Login() {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome!</Text>
       <Image
-              source={require('./assets/logo.png')} // Make sure to replace './path/to/your/logo.png' with the actual path to your logo image
-              style={{ width: 300, height: 200, marginBottom: 30 }} // Adjust the size of your logo as needed
-              resizeMode= "contain"
-              
-            />
+        source={require('./assets/logo.png')} // Make sure to replace './path/to/your/logo.png' with the actual path to your logo image
+        style={{ width: 300, height: 200, marginBottom: 30 }} // Adjust the size of your logo as needed
+        resizeMode="contain"
+
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
