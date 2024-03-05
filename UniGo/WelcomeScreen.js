@@ -11,7 +11,7 @@ export default function WelcomeScreen({ navigation }) {
       <Text style={{ color: 'black', fontSize: 20, marginBottom: 20 }}>We are here to get you home safely!</Text>
       <TouchableOpacity
       style={styles.requestbutton}
-        onPress={() => navigation.navigate('PickupScreen')}
+        onPress={() => navigation.navigate('LocationsScreen')}
       >
         <Text style={styles.submitbuttonText}>Request a ride</Text>
       </TouchableOpacity>
