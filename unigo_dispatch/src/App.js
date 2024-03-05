@@ -1,6 +1,6 @@
 import './App.css';
 import { db } from './firebaseConfig';
-import { collection, onSnapshot, query, doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -35,6 +35,10 @@ function App() {
     )
   }, [data]);
 
+  async function deleteRequest(id) {
+    console.log("Deleting request", id);
+    await deleteDoc(doc(db, "rideRequests", id));
+  }
 
   // eslint-disable-next-line
   const [time, setTime] = useState(Date.now());
@@ -103,6 +107,9 @@ function App() {
                   <div style={{ flexDirection: 'column', padding: '10px' }}>
                     <p>time waiting</p>
                     <p>{timeSince(new Date(request.time.toDate()))}</p>
+                  </div>
+                  <div style={{ flexDirection: 'column', padding: '10px' }}>
+                    <p style={{ color: 'red' }} onClick={() => deleteRequest(request.id)}>delete</p>
                   </div>
                 </div>
               })
