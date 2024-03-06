@@ -54,6 +54,7 @@ export default function App() {
       <Stack.Navigator
            screenOptions={{
             headerShown: true,
+            headerBackTitleVisible: false,
             headerTitle: () => (
               <Image
                 source={require('./assets/logo.png')}
