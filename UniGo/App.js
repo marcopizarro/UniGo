@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './login';
+import Login from './Login';
 import { styles } from './StyleSheet';
 import WaitingToBeMatched from './WaitingToBeMatched';
 import AreYouOk from './AreYouOk';
@@ -52,32 +52,32 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-           screenOptions={{
-            headerShown: true,
-            headerTitle: () => (
-              <Image
-                source={require('./assets/logo.png')}
-                style={{ width: 100, height: 50 }} // Removed align: 'center' as it's not a valid style property
-                resizeMode="contain"
-              />
-            ),
-            headerTitleAlign: 'center', // This will center the title text
-            headerStyle: {
-              backgroundColor: '#95A2F1',
-              height: 100, // Adjusted for a larger header
-            },
-            headerTintColor: '#fff',
-            headerTitleContainerStyle: {
-              justifyContent: 'center', // Adjust this as necessary to align the title content
-              alignItems: 'center', // Center the title content horizontally
-              height: '100%', // Ensure the container takes full height of the larger header
-            },
-          }}
-        >
+        screenOptions={{
+          headerShown: true,
+          headerTitle: () => (
+            <Image
+              source={require('./assets/logo.png')}
+              style={{ width: 100, height: 50 }} // Removed align: 'center' as it's not a valid style property
+              resizeMode="contain"
+            />
+          ),
+          headerTitleAlign: 'center', // This will center the title text
+          headerStyle: {
+            backgroundColor: '#95A2F1',
+            height: 100, // Adjusted for a larger header
+          },
+          headerTintColor: '#fff',
+          headerTitleContainerStyle: {
+            justifyContent: 'center', // Adjust this as necessary to align the title content
+            alignItems: 'center', // Center the title content horizontally
+            height: '100%', // Ensure the container takes full height of the larger header
+          },
+        }}
+      >
         {signedIn ? (
           <>
             <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            
+
             <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
             <Stack.Screen name="AreYouOk" component={AreYouOk} />
             <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
