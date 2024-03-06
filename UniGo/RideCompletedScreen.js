@@ -6,7 +6,7 @@ import { styles } from './StyleSheet';
 export default function RideCompletedScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>You have arrived!</Text>
+      <Text style={{color: 'white', fontWeight: 'bold', fontSize: '20'}}>Your ride has been completed!</Text>
       <StatusBar style="auto" />
     </View>
   );

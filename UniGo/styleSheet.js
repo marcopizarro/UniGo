@@ -68,22 +68,41 @@ export const styles = StyleSheet.create({
     borderColor: 'black', 
     borderWidth: 1, 
     borderRadius: 17, 
-    padding:23, 
+    padding:17, 
     margin:30,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.3, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+  // Android elevation
+  elevation: 8, // This adds depth to the button on 
   },
   submitButtonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
+    fontWeight: "500",
+  },
+
+  requestbuttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "500",
   },
   requestbutton: {
     backgroundColor: '#95A2F1',
-    borderColor: 'black',
+    borderColor: '#95A2F1',
     borderWidth: 1,
-    padding: 15,
-    borderRadius: 15,
-    width: '50%',
+    padding: 18,
+    borderRadius: 17,
+    width: '70%',
     alignItems: 'center',
-    margin: 10,
+    margin: 120,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+  // Android elevation
+  elevation: 8, // This adds depth to the button on 
   },
   map: {
     height: '80%',
