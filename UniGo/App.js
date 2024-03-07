@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
-import Login from './login';
+import Login from './Login';
 import { styles } from './StyleSheet';
 import WaitingToBeMatched from './WaitingToBeMatched';
 import AreYouOk from './AreYouOk';
@@ -75,10 +75,11 @@ export default function App() {
             },
           }}
         >
+
         {signedIn ? (
           <>
             <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            
+
             <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
             <Stack.Screen name="AreYouOk" component={AreYouOk} />
             <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
