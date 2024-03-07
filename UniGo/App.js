@@ -55,11 +55,12 @@ export default function App() {
         screenOptions={{
           headerShown: true,
           headerTitle: () => (
-            <Image
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: '27'}}> UniGo</Text>
+            /*<Image
               source={require('./assets/logo.png')}
               style={{ width: 100, height: 50 }} // Removed align: 'center' as it's not a valid style property
-              resizeMode="contain"
-            />
+              resizeMode="contain"*/
+            
           ),
           headerTitleAlign: 'center', // This will center the title text
           headerStyle: {
@@ -76,7 +77,7 @@ export default function App() {
       >
         {signedIn ? (
           <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{ headerShown: false }}/>
 
             <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
             <Stack.Screen name="AreYouOk" component={AreYouOk} />
