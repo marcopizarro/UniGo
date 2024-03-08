@@ -76,19 +76,25 @@ export default function App() {
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
+          headerBackTitleVisible: false,
           headerTitle: () => (
             <Image
               source={require('./assets/logo.png')}
-              style={{ width: 200, height: 100, alignSelf: 'center' }}
+              style={{ width: 100, height: 50, alignSelf: 'center' }}
               resizeMode="contain"
             />
           ),
           headerTitleAlign: 'center', // This will center the title text
           headerStyle: {
             backgroundColor: '#95A2F1',
-            height: 400, // Adjusted for a reasonable height
+            height: 100, // Adjusted for a reasonable height
           },
           headerTintColor: '#fff',
+          headerTitleContainerStyle: {
+            justifyContent: 'center', // Adjust this as necessary to align the title content
+            alignItems: 'center', // Center the title content horizontally
+            height: '100%', // Ensure the container takes full height of the larger header
+          },
           // Add profile button on the right side of header
           headerRight: ({ navigation }) => <ProfileButton navigation={navigation} handleSignOut={handleSignOut} />, 
 
