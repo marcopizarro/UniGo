@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { Dimensions } from 'react-native';
@@ -10,6 +9,9 @@ const GOOGLE_PLACES_API_KEY = 'AIzaSyDptYEg4S4YjUGP6qyj5pv1pV8ZPW2QaDY'; // neve
 import { Marker } from 'react-native-maps';
 import MapViewDirections from "react-native-maps-directions";
 import { useNavigation } from '@react-navigation/native';
+import RNPickerSelect from 'react-native-picker-select';
+import { Platform } from 'react-native';
+
 
 /*Stanford's Initial position*/
 const INITIAL_POSITION = {
@@ -30,6 +32,7 @@ export default function LocationsScreen() {
   const [dropoff, setDropoff] = useState(''); 
   const mapRef = useRef(null);
   const [showDirections, setShowDirections] = useState(false);
+  const [passengers, setPassengers] = useState('1'); // Default to 1 passenger
   const handlePickup = () => { 
     console.log('Pickup', { pickup }); 
   }; 
@@ -121,7 +124,7 @@ export default function LocationsScreen() {
         {pickup && <Marker coordinate={pickup} pinColor='blue' title='Pickup Location' />}
         {dropoff && <Marker coordinate={dropoff} pinColor='red' title='Dropoff Location'/>}
         
-      {showDirections && pickup && dropoff &&<MapViewDirections
+      {pickup && dropoff &&<MapViewDirections
       origin={pickup}
       destination={dropoff}
       apikey={GOOGLE_PLACES_API_KEY}
@@ -151,20 +154,53 @@ export default function LocationsScreen() {
         fetchDetails
         onPress={(data, details = null) => onPlaceSelectedDropoff(details)}
       />
+      <RNPickerSelect
+        onValueChange={(value) => setPassengers(value)}
+        items={[
+            { label: '1 passenger', value: '1' },
+            { label: '2 passengers', value: '2' },
+            { label: '3 passengers', value: '3' },
+            { label: '4 passengers', value: '4' },
+            { label: '5 passengers', value: '5' },
+        ]}
 
-<TouchableOpacity style={styles.button} onPress={traceRoute}>
-                      <Text style={styles.buttonText}>Trace route</Text> 
-                      </TouchableOpacity> 
+        useNativeAndroidPickerStyle={false} // disable the native Android style
+        placeholder={{
+            label: 'Select number of passengers...',
+            value: null,
+        }}
+        style={{ inputIOS: {
+          fontSize: 17,
+          padding: 12,
+          borderWidth: 1,
+          borderColor: 'white',
+          borderRadius: 4,
+          color: 'black',
+          backgroundColor: 'white',
+          marginTop: 5, 
+        },
+        inputAndroid: {
+        fontSize: 17,
+        padding: 12,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        backgroundColor: 'white',
+        marginTop: 5, 
+        },
+      }}
+    />
 
-                      <TouchableOpacity style={styles.button} onPress={() => {
-                      if (pickup && dropoff) {
-                        handlePickup();
-                        navigation.navigate('AreYouOk', { pickup : pickup, destination: dropoff });
-                      } else {
-                        alert('Please use the "Get current location" button to set the pickup location');
-                      }}}> 
-                      <Text style={styles.buttonText}>Submit</Text> 
-                      </TouchableOpacity> 
+      <TouchableOpacity style={styles.button} onPress={() => {
+      if (pickup && dropoff) {
+        handlePickup();
+        navigation.navigate('AreYouOk', { pickup: pickup, destination: dropoff, passengers: passengers });
+      } else {
+        alert('Please use the "Get current location" button to set the pickup location');
+      }}}> 
+      <Text style={styles.buttonText}>Submit</Text> 
+      </TouchableOpacity> 
       
     </View>
 }

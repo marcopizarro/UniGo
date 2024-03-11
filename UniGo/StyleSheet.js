@@ -6,7 +6,7 @@ import Constants from 'expo-constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#95A2F1',
+    backgroundColor: '#003FFA',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   headline1:{
     fontSize: 25,
     marginBottom: 60,
-    color: '#95A2F1',
+    color: '#167DEB',
     fontWeight: 'bold',
   },
 
@@ -50,19 +50,38 @@ export const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#E4E6F9', //lighter
+    backgroundColor: '#D6E4FF', //lighter
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 2,
+    padding: 14,
+    borderRadius: 20,
+    width: '40%',
+    alignItems: 'center',
+    margin: 5,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.5, // Shadow opacity
+    shadowRadius: 4, // Shadow blur radius
+  // Android elevation
+  elevation: 8, // This adds depth to the button on 
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+
+  areYouOkButton: {
+    backgroundColor: '#C9E2FF', 
+    borderColor: 'black',
+    borderWidth: 2,
     padding: 14,
     borderRadius: 20,
     width: '40%',
     alignItems: 'center',
     margin: 5,
   },
-  buttonText: {
-    color: 'black',
-    fontSize: 15,
-  },
+
   submitButton: {
     backgroundColor: 'black', 
     borderColor: 'black', 
@@ -77,10 +96,11 @@ export const styles = StyleSheet.create({
   // Android elevation
   elevation: 8, // This adds depth to the button on 
   },
+
   submitButtonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "700",
   },
 
   requestbuttonText: {
@@ -88,9 +108,10 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
+  
   requestbutton: {
-    backgroundColor: '#95A2F1',
-    borderColor: '#95A2F1',
+    backgroundColor: 'black',
+    borderColor: '#003FFA',
     borderWidth: 1,
     padding: 18,
     borderRadius: 17,
@@ -163,19 +184,26 @@ export const styles = StyleSheet.create({
   },
 
   selectedButton: {
-    backgroundColor: '#95A2F1', //darker
+    backgroundColor: '#003FFA', //darker
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 14,
     borderRadius: 20,
     width: '40%',
     alignItems: 'center',
     margin: 5,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 6}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on
   },
 
   selectedButtonText: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 18,
+    fontWeight: '700',
   },
   mapPickup: {
     height: '50%',

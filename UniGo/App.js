@@ -25,9 +25,10 @@ import ProfileButton from './ProfileButton'
 import RideInProgress from './RideInProgress';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Loading from './Loading';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
+import AccountScreen from './AccountScreen'; // Import your AccountScreen component
+import Loading from './Loading';
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
@@ -79,33 +80,27 @@ export default function App() {
 
   return (
 
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: true,
-              headerBackTitleVisible: false,
-              headerTitle: () => (
+    <NavigationContainer>
+      <Stack.Navigator
+           screenOptions={({ navigation }) => ({
+            headerShown: true,
+            headerBackTitleVisible: false,
+            headerTitle: () => <Text style={{ fontSize: 25, fontWeight: '800', color: '#FFF' }}>UniGo</Text>,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#003FFA',
+              height: 100,
+            },
+            headerTintColor: 'white',
+            headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('AccountScreen')}>
                 <Image
-                  source={require('./assets/logo.png')}
-                  style={{ width: 100, height: 50, alignSelf: 'center' }}
-                  resizeMode="contain"
+                  source={require('./assets/account.png')} // Update the path to where your icon is located
+                  style={{ width: 30, height: 30, marginRight: 10 }} // You can adjust the size and margin as needed
                 />
-              ),
-              headerTitleAlign: 'center', // This will center the title text
-              headerStyle: {
-                backgroundColor: '#95A2F1',
-                height: 100, // Adjusted for a reasonable height
-              },
-              headerTintColor: '#fff',
-              headerTitleContainerStyle: {
-                justifyContent: 'center', // Adjust this as necessary to align the title content
-                alignItems: 'center', // Center the title content horizontally
-                height: '100%', // Ensure the container takes full height of the larger header
-              },
-              // Add profile button on the right side of header
-              headerRight: ({ navigation }) => <ProfileButton navigation={navigation} handleSignOut={handleSignOut} />,
-
-            }}
+              </TouchableOpacity>
+            ),
+          })}
           >
             {loading ? <Stack.Screen name="Loading" component={Loading} /> : (
               <>

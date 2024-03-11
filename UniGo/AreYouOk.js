@@ -20,7 +20,7 @@ export default function AreYouOk({ route, navigation }) {
 
   // Function to get the style of the button depending on whether it's selected
   const getButtonStyle = (buttonKey) => {
-    return buttonKey === selectedButton ? styles.selectedButton : styles.button;
+    return buttonKey === selectedButton ? styles.selectedButton : styles.areYouOkButton;
   };
 
   // Function to get the text style depending on whether it's selected
@@ -76,7 +76,7 @@ export default function AreYouOk({ route, navigation }) {
 
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
       <Text style={styles.headline1}>Are you in a vulnerable situation?</Text>
 
       {/* Yes Button */}
