@@ -17,8 +17,10 @@ import RideCompletedScreen from './RideCompletedScreen';
 import LocationsScreen from './LocationsScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
+import AccountScreen from './AccountScreen'; // Import your AccountScreen component
+
 
 import 'expo-dev-menu';
 
@@ -52,24 +54,26 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-           screenOptions={{
+           screenOptions={({ navigation }) => ({
             headerShown: true,
             headerBackTitleVisible: false,
-            headerTitle: () => (
-              <Text style={{ fontSize: 25, fontWeight: '800', color: '#FFF' }}>UniGo</Text>
-            ),
-            headerTitleAlign: 'center', // This will center the title text
+            headerTitle: () => <Text style={{ fontSize: 25, fontWeight: '800', color: '#FFF' }}>UniGo</Text>,
+            headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#003FFA',
-              height: 100, // Adjusted for a larger header
+              height: 100,
             },
             headerTintColor: 'white',
-            headerTitleContainerStyle: {
-              justifyContent: 'center', // Adjust this as necessary to align the title content
-              alignItems: 'center', // Center the title content horizontally
-              height: '100%', // Ensure the container takes full height of the larger header
-            },
-          }}
+            headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('AccountScreen')}>
+                <Image
+                  source={require('./assets/account.png')} // Update the path to where your icon is located
+                  style={{ width: 30, height: 30, marginRight: 10 }} // You can adjust the size and margin as needed
+                />
+              </TouchableOpacity>
+            ),
+          })}
+  
         >
         {signedIn ? (
           <>
