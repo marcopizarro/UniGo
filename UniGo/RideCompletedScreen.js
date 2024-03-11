@@ -21,7 +21,7 @@ export default function RideCompletedScreen({ navigation }) {
         });
       }}
       >
-      <Text style={styles.submitButtonText}>Done</Text>
+      <Text style={styles.submitButtonText}>Done!</Text>
     </TouchableOpacity>
     <StatusBar style="auto" />
   </View>
