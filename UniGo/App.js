@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import Login from './Login';
@@ -15,31 +15,60 @@ import MatchApprovedScreen from './MatchApprovedScreen';
 import WaitingForDriverScreen from './WaitingForDriverScreen';
 import RideCompletedScreen from './RideCompletedScreen';
 import LocationsScreen from './LocationsScreen';
+import WelcomeScreenDriver from './WelcomeScreenDriver';
+import AcceptRide from './AcceptRide'
+import HeadToPickup from './HeadToPickup'
+import RideCompleteDriver from './RideCompleteDriver'
+import DrivingToDestination from './DrivingToDestination'
+import Profile from './Profile'
+import ProfileButton from './ProfileButton'
+import RideInProgress from './RideInProgress';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 import AccountScreen from './AccountScreen'; // Import your AccountScreen component
-
+import Loading from './Loading';
+import { Image } from 'react-native';
+import Constants from 'expo-constants';
+import { collection, doc, getDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 import 'expo-dev-menu';
 
 
 export default function App() {
   const [signedIn, setSignedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(0);
   const Stack = createNativeStackNavigator();
 
-  onAuthStateChanged(auth, (user) => {
+
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       // <Stack.Screen name="PickupScreen" component={PickupScreen} />
       // <Stack.Screen name="DestinationScreen" component={DestinationScreen} /> 
       const uid = user.uid;
+      const usersDocRef = doc(db, "users", uid);
+      try {
+        const docSnap = await getDoc(usersDocRef);
+        if (docSnap.exists()) {
+          const driverOrPass = docSnap.data().driver;
+          setStatus(driverOrPass == 1 ? 1 : 0);
+          setLoading(false);
+        } else {
+          console.log('Document does not exist');
+        }
+      } catch (error) {
+        console.error('Error getting document:', error);
+      }
       setSignedIn(true);
+      setLoading(false);
     } else {
       setSignedIn(false);
+      setLoading(false);
     }
   });
 
@@ -52,6 +81,7 @@ export default function App() {
   }
 
   return (
+
     <NavigationContainer>
       <Stack.Navigator
            screenOptions={({ navigation }) => ({
@@ -73,24 +103,41 @@ export default function App() {
               </TouchableOpacity>
             ),
           })}
-  
-        >
-        {signedIn ? (
-          <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{ headerShown: false }}/>
+          >
+            {loading ? <Stack.Screen name="Loading" component={Loading} /> : (
+              <>
+                {signedIn ? (
+                  <>
+                    {status === 0 ? (
+                      <>
+                        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+                        <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
+                        <Stack.Screen name="AreYouOk" component={AreYouOk} />
+                        <Stack.Screen name="RideInProgress" component={RideInProgress} />
+                        <Stack.Screen name="Profile">
+                          {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
+                        </Stack.Screen>
+                      </>
+                    ) : (
+                      <>
+                        <Stack.Screen name="WelcomeScreenDriver" component={WelcomeScreenDriver} />
+                        <Stack.Screen name="AcceptRide" component={AcceptRide} />
+                        <Stack.Screen name="HeadToPickup" component={HeadToPickup} />
+                        <Stack.Screen name="DrivingToDestination" component={DrivingToDestination} />
+                        <Stack.Screen name="RideCompleteDriver" component={RideCompleteDriver} />
+                        <Stack.Screen name="Profile">
+                          {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
+                        </Stack.Screen>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                )}
+              </>
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
 
-            <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
-            <Stack.Screen name="AreYouOk" component={AreYouOk} />
-            <Stack.Screen name="WaitingToBeMatched" component={WaitingToBeMatched} />
-            <Stack.Screen name="MatchApprovedScreen" component={MatchApprovedScreen} />
-            <Stack.Screen name="WaitingForDriverScreen" component={WaitingForDriverScreen} />
-            <Stack.Screen name="DrivingHomeScreen" component={DrivingHomeScreen} />
-            <Stack.Screen name="RideCompletedScreen" component={RideCompletedScreen} />
-          </>
-        ) : (
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }

@@ -125,6 +125,54 @@ export const styles = StyleSheet.create({
   // Android elevation
   elevation: 8, // This adds depth to the button on 
   },
+  welcomeDriverbutton: {
+    backgroundColor: '#95A2F1',
+    borderColor: '#95A2F1',
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 15,
+    width: '70%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  acceptRidebutton: {
+    backgroundColor: '#95A2F1',
+    borderColor: '#95A2F1',
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 15,
+    width: '40%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  declinebutton: {
+    backgroundColor: '#D22B2B',
+    borderColor: '#D22B2B',
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 15,
+    width: '40%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
   map: {
     height: '80%',
     width: '100%'
@@ -163,6 +211,16 @@ export const styles = StyleSheet.create({
   },
   mapWaiting: {
     height: '30%',
+    width: '100%'
+  },
+  mapAcceptRide: {
+    top: -80,
+    height: '60%',
+    width: '100%'
+  },
+  mapDriver: {
+    top: -120,
+    height: '70%',
     width: '100%'
   },
   mapOverlay: {
@@ -212,6 +270,54 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: "white"
   },
+
+  profileButton: {
+    position: 'absolute',
+    top: -20,
+    right: 0,
+    padding: 0,
+    backgroundColor: 'transparent',
+  },
+  profileIcon: {
+    width: 40,
+    height: 40,
+    tintColor: 'white'
+},
+buttonContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  position: 'absolute',
+  bottom: 20,
+  left: 20,
+  right: 20,
+},
+headToPickupContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  position: 'absolute',
+  bottom: 100,
+  left: 20,
+  right: 20,
+},
+startTripContainer: {
+  flexDirection: 'row',
+  justifyContent: 'center',
+  position: 'absolute',
+  bottom: 20,
+  left: '5%',
+  right: '5%',
+  width: '90%',
+},
+startTripbutton: {
+  backgroundColor: '#746CC7',
+  borderColor: 'black',
+  borderWidth: 1,
+  padding: 15,
+  borderRadius: 15,
+  width: '95%',
+  alignItems: 'center',
+  margin: 10,
+},
 
 
 
