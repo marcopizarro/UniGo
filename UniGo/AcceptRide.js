@@ -17,6 +17,8 @@ export default function AcceptRide({ route, navigation }) {
     const [pickupName, setPickupName] = useState('');
     const [destinationName, setDestinationName] = useState('');
 
+    
+
 
     const getPlaceName = async (pickupLatitude, pickupLongitude, destinationLatitude, destinationLongitude) => {
         console.log(pickupLatitude);
