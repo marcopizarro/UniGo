@@ -8,7 +8,7 @@ import { Image } from 'react-native';
 export default function WelcomeScreen({ navigation }) {
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#95A2F1'}}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#003FFA'}}>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ color: 'white', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>Welcome!</Text>
         <Image
