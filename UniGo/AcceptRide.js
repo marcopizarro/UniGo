@@ -3,22 +3,39 @@ import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
-import MapView, { Marker, Polyline} from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import polyline from 'polyline';
 import ProfileButton from './ProfileButton';
-
+import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 
 
 
 export default function AcceptRide({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [pickupName, setPickupName] = useState('');
     const [destinationName, setDestinationName] = useState('');
+    const [data, setData] = useState(null);
+    const [ref, setRef] = useState(null);
 
-    
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
+            console.log("Current data: ", doc.data());
+            if (doc.exists()) {
+                if (doc.data().status === "DroppedOff") {
+                    unsub();
+                }
+                setData(doc.data());
+                setRef(doc.ref);
+            } else {
+                console.log("No such document!");
+            }
+        });
 
+        return () => unsub();
+    }, []);
 
     const getPlaceName = async (pickupLatitude, pickupLongitude, destinationLatitude, destinationLongitude) => {
         console.log(pickupLatitude);
@@ -26,43 +43,43 @@ export default function AcceptRide({ route, navigation }) {
         console.log(destinationLatitude);
         console.log(destinationLongitude);
         try {
-          const location = await Location.reverseGeocodeAsync({
-            latitude: pickupLatitude,
-            longitude: pickupLongitude,
-          });
-      
-          // The location object contains the address components, including the name
-          let str1 = location[0].name;
-          let str2 = location[0].street;
-          let result = str1 + " " + str2;
-          console.log(result);
+            const location = await Location.reverseGeocodeAsync({
+                latitude: pickupLatitude,
+                longitude: pickupLongitude,
+            });
 
-          setPickupName({
-            name: result,
-          });
-          
+            // The location object contains the address components, including the name
+            let str1 = location[0].name;
+            let str2 = location[0].street;
+            let result = str1 + " " + str2;
+            console.log(result);
+
+            setPickupName({
+                name: result,
+            });
+
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
 
         try {
-          const location = await Location.reverseGeocodeAsync({
-            latitude: destinationLatitude,
-            longitude: destinationLongitude,
-          });
-      
-          // The location object contains the address components, including the name
-          let str1 = location[0].name;
-          let str2 = location[0].street;
-          let result = str1 + " " + str2;
-          console.log(result);
+            const location = await Location.reverseGeocodeAsync({
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+            });
 
-          setDestinationName({
-            name: result,
-          });
-          
+            // The location object contains the address components, including the name
+            let str1 = location[0].name;
+            let str2 = location[0].street;
+            let result = str1 + " " + str2;
+            console.log(result);
+
+            setDestinationName({
+                name: result,
+            });
+
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
     };
 
@@ -140,13 +157,22 @@ export default function AcceptRide({ route, navigation }) {
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    style={styles.acceptRidebutton}  
-                    onPress={() => {
+                    style={styles.acceptRidebutton}
+                    onPress={async () => {
+                        if (data.status !== "waiting") {
+                            navigation.goBack()
+                        }
+                        await updateDoc(ref, {
+                            status: "WaitingForDriver",
+                            driver: driverName
+                        });
                         navigation.navigate('HeadToPickup', {
                             driverLoc: driverLoc,
                             pickupLoc: pickupLoc,
                             destinationLoc: destinationLoc,
-                            destinationName: destinationName
+                            destinationName: destinationName,
+                            rideID: rideID,
+                            driverName: driverName,
                         });
                     }}
                 >

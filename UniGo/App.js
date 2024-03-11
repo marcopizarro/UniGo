@@ -53,7 +53,7 @@ export default function App() {
         const docSnap = await getDoc(usersDocRef);
         if (docSnap.exists()) {
           const driverOrPass = docSnap.data().driver;
-          setStatus(driverOrPass);
+          setStatus(driverOrPass == 1 ? 1 : 0);
           setLoading(false);
         } else {
           console.log('Document does not exist');
