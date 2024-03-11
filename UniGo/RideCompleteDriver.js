@@ -16,11 +16,6 @@ export default function RideCompleteDriver({ navigation }) {
       <TouchableOpacity style={styles.welcomeDriverbutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
         <Text style={styles.submitButtonText}>Next Ride</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.welcomeDriverbutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
-        <Text style={styles.submitButtonText}>End</Text>
-      </TouchableOpacity>
-
     </View>
     
   );

@@ -6,12 +6,33 @@ import * as Location from 'expo-location';
 import MapView, { Marker, Polyline} from 'react-native-maps';
 import polyline from 'polyline';
 import ProfileButton from './ProfileButton';
+import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 export default function DrivingToDestination({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
     const [destinationName, setDestinationName] = useState('');
+    const [data, setData] = useState(null);
+    const [ref, setRef] = useState(null);
+
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
+            console.log("Current data: ", doc.data());
+            if (doc.exists()) {
+                if (doc.data().status === "DroppedOff") {
+                    unsub();
+                }
+                setData(doc.data());
+                setRef(doc.ref);
+            } else {
+                console.log("No such document!");
+            }
+        });
+
+        return () => unsub();
+    }, []);
 
 
     const getPlaceName = async (destinationLatitude, destinationLongitude) => {
@@ -124,12 +145,11 @@ export default function DrivingToDestination({ route, navigation }) {
 
             <TouchableOpacity
                 style={styles.welcomeDriverbutton}
-                onPress={() => {
-                    navigation.navigate('RideCompleteDriver', {
-                        driverLoc: driverLoc,
-                        pickupLoc: pickupLoc,
-                        destinationLoc: destinationLoc,
+                onPress={async () => {
+                    await updateDoc(ref, {
+                        status: "DroppedOff",
                     });
+                    navigation.navigate('RideCompleteDriver');
                 }}
             >
                 <Text style={styles.submitButtonText}>End Trip</Text>

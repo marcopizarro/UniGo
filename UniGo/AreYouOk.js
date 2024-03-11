@@ -5,6 +5,7 @@ import { Button } from 'react-native';
 import { db } from './firebaseConfig'; // Adjust the path to your firebaseConfig file
 import { addDoc, collection, doc } from 'firebase/firestore';
 import { auth } from './firebaseConfig'; // Adjust the path to your firebaseConfig file
+import { CommonActions } from '@react-navigation/native';
 
 export default function AreYouOk({ route, navigation }) {
 
@@ -40,12 +41,33 @@ export default function AreYouOk({ route, navigation }) {
           time: new Date(),
           status: "waiting"
         });
+        docRef.then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+          const rideID = docRef.id;
+          // navigation.navigate('RideInProgress', { pickup, destination, rideID }); // Replace with your actual next screen name
+          // navigation.replace('RideInProgress', { pickup, destination, rideID });
+          // const resetAction = CommonActions.reset({
+          //   index: 0,
+          //   actions: [NavigationActions.navigate({ routeName: 'RideInProgress', params: { pickup, destination } })],
+          // });
+          // navigation.dispatch(resetAction);
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                { name: 'RideInProgress', params: { pickup, destination, rideID } },
+              ],
+            })
+          );
+
+
+        });
       }
       catch (e) {
         console.error("Error adding document: ", e);
       }
+
       // Navigate to the next screen if a button has been selected
-      navigation.navigate('WaitingToBeMatched', { pickup, destination }); // Replace with your actual next screen name
     } else {
       // You can add an alert here if no option is selected
       alert('Please select an option before submitting.');

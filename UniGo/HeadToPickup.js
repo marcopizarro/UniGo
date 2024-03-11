@@ -3,14 +3,35 @@ import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
-import MapView, { Marker, Polyline} from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import polyline from 'polyline';
 import ProfileButton from './ProfileButton';
+import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 export default function HeadToPickup({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc, destinationName } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, destinationName, rideID, driverName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
+    const [data, setData] = useState(null);
+    const [ref, setRef] = useState(null);
+
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
+            console.log("Current data: ", doc.data());
+            if (doc.exists()) {
+                if (doc.data().status === "DroppedOff") {
+                    unsub();
+                }
+                setData(doc.data());
+                setRef(doc.ref);
+            } else {
+                console.log("No such document!");
+            }
+        });
+
+        return () => unsub();
+    }, []);
 
     // Function to fetch route coordinates
     const fetchRouteCoordinates = async () => {
@@ -89,38 +110,54 @@ export default function HeadToPickup({ route, navigation }) {
 
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
-
-            <View style={styles.headToPickupContainer}>
-                <TouchableOpacity
-                    style={styles.acceptRidebutton}
-                    onPress={() => {
-                        navigation.navigate('HeadToPickup', {
-                            driverLoc: driverLoc,
-                            pickupLoc: pickupLoc,
-                            destinationLoc: destinationLoc,
-                        });
-                    }}
-                >
-                    <Text style={styles.submitButtonText}>Arrived</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.declinebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
-                    <Text style={styles.submitButtonText}>Cancel</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.startTripContainer}>
-                <TouchableOpacity
-                    style={styles.startTripbutton}
-                    onPress={() => {
-                        navigation.navigate('DrivingToDestination', {
-                            driverLoc: driverLoc,
-                            pickupLoc: pickupLoc,
-                            destinationLoc: destinationLoc,
-                        });
-                    }}
-                >
-                    <Text style={styles.submitButtonText}>Start Trip</Text>
-                </TouchableOpacity>
-            </View>
+            {data &&
+                <>
+                    <View style={styles.headToPickupContainer}>
+                        {data.status !== "DriverIsWaiting" &&
+                            <TouchableOpacity
+                                style={styles.acceptRidebutton}
+                                onPress={async () => {
+                                    await updateDoc(ref, {
+                                        status: "DriverIsWaiting",
+                                    });
+                                }}
+                            >
+                                <Text style={styles.submitButtonText}>Arrived</Text>
+                            </TouchableOpacity>
+                        }
+                        {data.status === "DriverIsWaiting" &&
+                            <TouchableOpacity style={styles.declinebutton} onPress={async () => {
+                                await updateDoc(ref, {
+                                    status: "RiderNotHere",
+                                });
+                                navigation.navigate('WelcomeScreenDriver');
+                            }}>
+                                <Text style={styles.submitButtonText}>Rider Not Here</Text>
+                            </TouchableOpacity>
+                        }
+                    </View>
+                {data.status === "DriverIsWaiting" &&
+                    <View style={styles.startTripContainer}>
+                        <TouchableOpacity
+                            style={styles.startTripbutton}
+                            onPress={async () => {
+                                await updateDoc(ref, {
+                                    status: "InTransit",
+                                });
+                                navigation.navigate('DrivingToDestination', {
+                                    driverLoc: driverLoc,
+                                    pickupLoc: pickupLoc,
+                                    destinationLoc: destinationLoc,
+                                    rideID,
+                                    driverName,
+                                });
+                            }}
+                        >
+                            <Text style={styles.submitButtonText}>Start Trip</Text>
+                        </TouchableOpacity>
+                    </View>
+}
+                </>}
         </View>
     );
 }
