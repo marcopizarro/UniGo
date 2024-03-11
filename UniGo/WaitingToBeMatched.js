@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View, Image, Button} from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 
-export default function WaitingToBeMatched({ route, navigation }) {
+export default function WaitingToBeMatched({ pickup, destination }) {
 
-  const { pickup, destination } = route.params; 
 
     return(
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' , backgroundColor: '#E1E1E1'}}>
@@ -18,10 +17,6 @@ export default function WaitingToBeMatched({ route, navigation }) {
               style={{ width: 410, height: 250, marginLeft: 20, marginRight: 20}}
               resizeMode='contain'
               />
-            <Button
-            title="Pretend you've matched"
-            onPress={() => navigation.navigate('WaitingForDriverScreen', { pickup : pickup, destination: destination })}
-          />
         </View>
       );
 

@@ -29,8 +29,6 @@ import { Image, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 import AccountScreen from './AccountScreen'; // Import your AccountScreen component
 import Loading from './Loading';
-import { Image } from 'react-native';
-import Constants from 'expo-constants';
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
