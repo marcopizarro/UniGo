@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { Dimensions } from 'react-native';
@@ -121,7 +120,7 @@ export default function LocationsScreen() {
         {pickup && <Marker coordinate={pickup} pinColor='blue' title='Pickup Location' />}
         {dropoff && <Marker coordinate={dropoff} pinColor='red' title='Dropoff Location'/>}
         
-      {showDirections && pickup && dropoff &&<MapViewDirections
+      {pickup && dropoff &&<MapViewDirections
       origin={pickup}
       destination={dropoff}
       apikey={GOOGLE_PLACES_API_KEY}
@@ -152,9 +151,7 @@ export default function LocationsScreen() {
         onPress={(data, details = null) => onPlaceSelectedDropoff(details)}
       />
 
-<TouchableOpacity style={styles.button} onPress={traceRoute}>
-                      <Text style={styles.buttonText}>Trace route</Text> 
-                      </TouchableOpacity> 
+
 
                       <TouchableOpacity style={styles.button} onPress={() => {
                       if (pickup && dropoff) {
