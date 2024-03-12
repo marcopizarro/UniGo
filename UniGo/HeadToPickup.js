@@ -8,6 +8,7 @@ import polyline from 'polyline';
 import ProfileButton from './ProfileButton';
 import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import ChatScreen from './ChatScreen';
 
 export default function HeadToPickup({ route, navigation }) {
     const { driverLoc, pickupLoc, destinationLoc, destinationName, rideID, driverName } = route.params;
@@ -133,6 +134,8 @@ export default function HeadToPickup({ route, navigation }) {
                             </TouchableOpacity>
                         }
                         {data.status === "DriverIsWaiting" &&
+
+                        <View>
                             <TouchableOpacity style={styles.declinebutton} onPress={async () => {
                                 await updateDoc(ref, {
                                     status: "RiderNotHere",
@@ -141,6 +144,17 @@ export default function HeadToPickup({ route, navigation }) {
                             }}>
                                 <Text style={styles.submitButtonText}>Rider Not Here</Text>
                             </TouchableOpacity>
+                            
+                        
+                            <TouchableOpacity
+                                    onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
+                                    style={styles.button}
+                                >
+                                <Text style={styles.buttonText}>Go chat</Text>
+                                </TouchableOpacity>
+                            
+                        </View>
+                            
                         }
                     </View>
                 {data.status === "DriverIsWaiting" &&
