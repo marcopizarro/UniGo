@@ -32,6 +32,7 @@ import AccountScreen from './AccountScreenUser'; // Import your AccountScreen co
 import Loading from './Loading';
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import ChatScreen from './ChatScreen';
 
 import 'expo-dev-menu';
 
@@ -121,6 +122,7 @@ export default function App() {
                         <Stack.Screen name="AreYouOk" component={AreYouOk} />
                         <Stack.Screen name="RideInProgress" component={RideInProgress} />
                         <Stack.Screen name="AccountScreenUser" component={AccountScreenUser} />
+                        <Stack.Screen name="ChatScreen" component={ChatScreen} />
                         <Stack.Screen name="Profile">
                           {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
                         </Stack.Screen>
@@ -130,6 +132,7 @@ export default function App() {
                         <Stack.Screen name="WelcomeScreenDriver" component={WelcomeScreenDriver} />
                         <Stack.Screen name="AcceptRide" component={AcceptRide} />
                         <Stack.Screen name="HeadToPickup" component={HeadToPickup} />
+                        <Stack.Screen name="ChatScreen" component={ChatScreen} />
                         <Stack.Screen name="DrivingToDestination" component={DrivingToDestination} />
                         <Stack.Screen name="RideCompleteDriver" component={RideCompleteDriver} />
                         <Stack.Screen name="AccountScreenDriver" component={AccountScreenDriver} />
