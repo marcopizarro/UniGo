@@ -12,7 +12,7 @@ import { styles } from './StyleSheet'; // Make sure this is correctly imported
 const AccountScreenDriver = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [classYear, setClassYear] = useState('');
+  const [phoneNumber, setphoneNumber] = useState('');
   const [carType, setCarType] = useState('');
   const [licensePlate, setLicensePlate] = useState('');
   const [driverImage, setDriverImage] = useState(null);
@@ -28,7 +28,7 @@ const AccountScreenDriver = () => {
           const userData = userSnap.data();
           setFirstName(userData.firstName || '');
           setLastName(userData.lastName || '');
-          setClassYear(userData.classYear || '');
+          setphoneNumber(userData.phoneNumber || '');
           setCarType(userData.carType || '');
           setLicensePlate(userData.licensePlate || '');
           // setDriverImage(userData.driverImage || null); // Implement this part based on how you store and fetch images
@@ -47,7 +47,7 @@ const AccountScreenDriver = () => {
       await setDoc(userRef, {
         firstName, 
         lastName, 
-        classYear, 
+        phoneNumber, 
         carType, 
         licensePlate,
         // driverImage: driverImage.uri, // Assuming you will store the image URI. Adjust as necessary for your image handling setup.
@@ -110,9 +110,9 @@ const AccountScreenDriver = () => {
         editable={isEditMode}
       />
       <TextInput
-        placeholder="Class Year"
-        value={classYear}
-        onChangeText={setClassYear}
+        placeholder="Phone Number"
+        value={phoneNumber}
+        onChangeText={setphoneNumber}
         style={styles.input}
         editable={isEditMode}
       />
