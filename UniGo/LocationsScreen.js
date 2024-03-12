@@ -205,7 +205,10 @@ export default function LocationsScreen() {
           </TouchableOpacity>
 
         </View>
-        : <ActivityIndicator size="large" color="#95A2F1" />
+        :
+        <View style={styles.searchContainer}>
+          <ActivityIndicator size="large" color="#95A2F1" />
+        </View>
       }
 
     </View>
