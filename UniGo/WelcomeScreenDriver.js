@@ -8,13 +8,13 @@ import { Marker } from 'react-native-maps';
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import ProfileButton from './ProfileButton';
-import { getDocs, query, where, orderBy, limit, updateDoc } from "firebase/firestore";
+import { getDocs, query, where, orderBy, limit, updateDoc, onSnapshot } from "firebase/firestore";
 
 export default function WelcomeScreenDriver({ navigation }) {
 
   const [driverLoc, setDriverLoc] = useState('');
-  const [pickup, setPickup] = useState('');
-  const [destination, setDestination] = useState('');
+  const [pickup, setPickup] = useState(null);
+  const [destination, setDestination] = useState(null);
   const [rideID, setRideID] = useState(0);
   const [noRider, setNoRider] = useState(true);
   const driverName = "driver1"; // TODO pull from db
@@ -29,23 +29,25 @@ export default function WelcomeScreenDriver({ navigation }) {
     console.log("Getting rider");
     //TODO make this constantly update
     const q = query(collection(db, "rideRequests"), where("status", "==", "waiting"), orderBy("time", "asc"), limit(1));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      setNoRider(true);
-      console.log("No rider found");
-      return;
-    }
-    querySnapshot.forEach(async (doc) => {
-      console.log(doc.id, " => ", doc.data());
-      if (doc.data().status === "waiting") {
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      if (querySnapshot.empty) {
+        console.log("No rider found");
+        setNoRider(true);
+        return;
+      }
+      querySnapshot.forEach(async (doc) => {
+        console.log(doc.id, " => ", doc.data());
         console.log("Rider found");
         setRideID(doc.id);
         setPickup(doc.data().pickupLoc);
         setDestination(doc.data().destinationLoc);
         setNoRider(false);
-      }
-    });
+      });
+    }
+    );
+    return () => unsubscribe();
   }
+
 
   const getCurrentLocation = async () => {
     const { granted } = await Location.requestForegroundPermissionsAsync();
@@ -63,14 +65,14 @@ export default function WelcomeScreenDriver({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {
-        !(driverLoc && pickup && destination && rideID && driverName) ?
+        !(driverLoc && driverName || (rideID && destination && pickup && driverLoc && driverName)) ?
           <ActivityIndicator size="large" color="#95A2F1" />
           : (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ color: '#736CC1', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>UniGo Driver</Text>
               {noRider ? <Text>No Riders to Pick Up</Text> : (
                 <TouchableOpacity style={styles.welcomeDriverbutton} onPress={async () => {
-                  if (driverLoc && pickup && destination && rideID && driverName) {
+                  if (driverLoc && driverName) {
                     navigation.navigate('AcceptRide', {
                       driverLoc: driverLoc, pickupLoc: pickup, destinationLoc: destination, rideID, driverName
                     });
