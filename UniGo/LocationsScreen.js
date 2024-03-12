@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { Dimensions } from 'react-native';
-import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { GooglePlacesAutocomplete, GooglePlaceDetail } from 'react-native-google-places-autocomplete';
-import MapView,{PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 const GOOGLE_PLACES_API_KEY = 'AIzaSyDptYEg4S4YjUGP6qyj5pv1pV8ZPW2QaDY'; // never save your real api key in a snack!
 import { Marker } from 'react-native-maps';
 import MapViewDirections from "react-native-maps-directions";
@@ -22,23 +22,23 @@ const INITIAL_POSITION = {
 };
 
 
-export default function LocationsScreen() { 
+export default function LocationsScreen() {
   const navigation = useNavigation();
   /*Necessary constants*/
   const [location, setLocation] = useState(null);
-  const [currentLocation, setCurrentLocation] =useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [pickup, setPickup] = useState(''); 
-  const [dropoff, setDropoff] = useState(''); 
+  const [pickup, setPickup] = useState('');
+  const [dropoff, setDropoff] = useState('');
   const mapRef = useRef(null);
   const [showDirections, setShowDirections] = useState(false);
   const [passengers, setPassengers] = useState('1'); // Default to 1 passenger
-  const handlePickup = () => { 
-    console.log('Pickup', { pickup }); 
-  }; 
-  const handleDropoff = () => { 
-    console.log('Dropoff', { dropoff }); 
-  }; 
+  const handlePickup = () => {
+    console.log('Pickup', { pickup });
+  };
+  const handleDropoff = () => {
+    console.log('Dropoff', { dropoff });
+  };
 
   /*Obtain user's current location*/
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function LocationsScreen() {
       setLocation(location);
       const currentLocation = {
         description: "Current location",
-        geometry: {location: {lat: location.coords.latitude, lng: location.coords.longitude}}
+        geometry: { location: { lat: location.coords.latitude, lng: location.coords.longitude } }
       };
       setCurrentLocation(currentLocation);
     })();
@@ -104,7 +104,7 @@ export default function LocationsScreen() {
 
   /*Trace the route after the traceroute button is pressed and zoom accordingly
   to the final route */
-  const traceRoute= () => {
+  const traceRoute = () => {
     if (pickup && dropoff) {
       setShowDirections(true);
       mapRef.current?.fitToCoordinates([pickup, dropoff], { edgePadding })
@@ -114,7 +114,7 @@ export default function LocationsScreen() {
 
   return (
     <View style={styles.container}>
-    <MapView
+      <MapView
         ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE}
@@ -122,88 +122,91 @@ export default function LocationsScreen() {
         zoomEnabled={true}
       >
         {pickup && <Marker coordinate={pickup} pinColor='blue' title='Pickup Location' />}
-        {dropoff && <Marker coordinate={dropoff} pinColor='red' title='Dropoff Location'/>}
-        
-      {pickup && dropoff &&<MapViewDirections
-      origin={pickup}
-      destination={dropoff}
-      apikey={GOOGLE_PLACES_API_KEY}
-      strokeColor='#6644ff'
-      strokeWidth={5}>
-      </MapViewDirections>}
+        {dropoff && <Marker coordinate={dropoff} pinColor='red' title='Dropoff Location' />}
+
+        {pickup && dropoff && <MapViewDirections
+          origin={pickup}
+          destination={dropoff}
+          apikey={GOOGLE_PLACES_API_KEY}
+          strokeColor='#6644ff'
+          strokeWidth={5}>
+        </MapViewDirections>}
       </MapView>
 
-      {currentLocation &&
-    <View style={styles.searchContainer}>
-      <GooglePlacesAutocomplete
-        placeholder="Pickup Location"
-        query={{
-          key: GOOGLE_PLACES_API_KEY,
-          language: 'en', // language of the results
-        }}
-        fetchDetails
-        onPress={(data, details = null) => onPlaceSelectedPickup(details)}
-        predefinedPlaces={[currentLocation]}
-      />
-      <GooglePlacesAutocomplete
-        placeholder="Drop off Location"
-        query={{
-          key: GOOGLE_PLACES_API_KEY,
-          language: 'en', // language of the results
-        }}
-        fetchDetails
-        onPress={(data, details = null) => onPlaceSelectedDropoff(details)}
-      />
-      <RNPickerSelect
-        onValueChange={(value) => setPassengers(value)}
-        items={[
-            { label: '1 passenger', value: '1' },
-            { label: '2 passengers', value: '2' },
-            { label: '3 passengers', value: '3' },
-            { label: '4 passengers', value: '4' },
-            { label: '5 passengers', value: '5' },
-        ]}
+      {currentLocation ?
+        <View style={styles.searchContainer}>
+          <GooglePlacesAutocomplete
+            placeholder="Pickup Location"
+            query={{
+              key: GOOGLE_PLACES_API_KEY,
+              language: 'en', // language of the results
+            }}
+            fetchDetails
+            onPress={(data, details = null) => onPlaceSelectedPickup(details)}
+            predefinedPlaces={[currentLocation]}
+          />
+          <GooglePlacesAutocomplete
+            placeholder="Drop off Location"
+            query={{
+              key: GOOGLE_PLACES_API_KEY,
+              language: 'en', // language of the results
+            }}
+            fetchDetails
+            onPress={(data, details = null) => onPlaceSelectedDropoff(details)}
+          />
+          <RNPickerSelect
+            onValueChange={(value) => setPassengers(value)}
+            items={[
+              { label: '1 passenger', value: '1' },
+              { label: '2 passengers', value: '2' },
+              { label: '3 passengers', value: '3' },
+              { label: '4 passengers', value: '4' },
+              { label: '5 passengers', value: '5' },
+            ]}
 
-        useNativeAndroidPickerStyle={false} // disable the native Android style
-        placeholder={{
-            label: 'Select number of passengers...',
-            value: null,
-        }}
-        style={{ inputIOS: {
-          fontSize: 17,
-          padding: 12,
-          borderWidth: 1,
-          borderColor: 'white',
-          borderRadius: 4,
-          color: 'black',
-          backgroundColor: 'white',
-          marginTop: 5, 
-        },
-        inputAndroid: {
-        fontSize: 17,
-        padding: 12,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 4,
-        color: 'black',
-        backgroundColor: 'white',
-        marginTop: 5, 
-        },
-      }}
-    />
+            useNativeAndroidPickerStyle={false} // disable the native Android style
+            placeholder={{
+              label: 'Select number of passengers...',
+              value: null,
+            }}
+            style={{
+              inputIOS: {
+                fontSize: 17,
+                padding: 12,
+                borderWidth: 1,
+                borderColor: 'white',
+                borderRadius: 4,
+                color: 'black',
+                backgroundColor: 'white',
+                marginTop: 5,
+              },
+              inputAndroid: {
+                fontSize: 17,
+                padding: 12,
+                borderWidth: 1,
+                borderColor: 'gray',
+                borderRadius: 4,
+                color: 'black',
+                backgroundColor: 'white',
+                marginTop: 5,
+              },
+            }}
+          />
 
-      <TouchableOpacity style={styles.button} onPress={() => {
-      if (pickup && dropoff) {
-        handlePickup();
-        navigation.navigate('AreYouOk', { pickup: pickup, destination: dropoff, passengers: passengers });
-      } else {
-        alert('Please use the "Get current location" button to set the pickup location');
-      }}}> 
-      <Text style={styles.buttonText}>Submit</Text> 
-      </TouchableOpacity> 
-      
-    </View>
-}
+          <TouchableOpacity style={styles.button} onPress={() => {
+            if (pickup && dropoff) {
+              handlePickup();
+              navigation.navigate('AreYouOk', { pickup: pickup, destination: dropoff, passengers: passengers });
+            } else {
+              alert('Please use the "Get current location" button to set the pickup location');
+            }
+          }}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
+
+        </View>
+        : <ActivityIndicator size="large" color="#95A2F1" />
+      }
 
     </View>
   );
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 8,
     top: Constants.statusBarHeight,
-    
+
   },
   input: {
     borderColor: "#888",
