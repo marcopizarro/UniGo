@@ -63,6 +63,13 @@ export default function HeadToPickup({ route, navigation }) {
                 latitude: coords.latitude,
                 longitude: coords.longitude,
             });
+            // send coordinates to firebase
+            await updateDoc(ref, {
+                driverLocation: {
+                    latitude: coords.latitude,
+                    longitude: coords.longitude,
+                },
+            });
         }, 5000); // Update the position every 5 seconds
 
         return () => clearInterval(intervalId);
