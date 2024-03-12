@@ -166,12 +166,12 @@ export default function LocationsScreen() {
 
         useNativeAndroidPickerStyle={false} // disable the native Android style
         placeholder={{
-            label: 'Select number of passengers...',
+            label: 'Select Number of Passengers...',
             value: null,
         }}
         style={{ inputIOS: {
-          fontSize: 17,
-          padding: 12,
+          fontSize: 15,
+          padding: 10,
           borderWidth: 1,
           borderColor: 'white',
           borderRadius: 4,
@@ -180,8 +180,8 @@ export default function LocationsScreen() {
           marginTop: 5, 
         },
         inputAndroid: {
-        fontSize: 17,
-        padding: 12,
+        fontSize: 15,
+        padding: 10,
         borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
