@@ -49,7 +49,7 @@ export default function RideInProgress({ route, navigation }) {
                     }
                     {data.status === "WaitingForDriver" &&
                         <>
-                            <WaitingForDriverScreen pickup={pickup} destination={destination} />
+                            <WaitingForDriverScreen pickup={pickup} destination={destination} driverLocation={data.driverLocation}/>
                         </>
                     }
                     {data.status === "DriverIsWaiting" &&

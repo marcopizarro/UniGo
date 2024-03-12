@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import { styles } from './StyleSheet';
 
 
-export default function WaitingForDriverScreen({ pickup, destination }) {
+export default function WaitingForDriverScreen({ pickup, destination, driverLocation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
