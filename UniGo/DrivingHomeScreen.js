@@ -57,7 +57,7 @@ export default function DrivingHomeScreen({ pickup, destination, driverLocation,
         origin={pickup}
         destination={destination}
         apikey={GOOGLE_PLACES_API_KEY}
-        strokeColor='#6644ff'
+        strokeColor='#003FFA'
         strokeWidth={5}>
         </MapViewDirections>}
         <Marker
@@ -85,7 +85,11 @@ export default function DrivingHomeScreen({ pickup, destination, driverLocation,
         </Marker>
 }
       </MapView>
-      <Text>Your driver is taking you to your destination. </Text>
+      <View style={styles.overlayContainer}>
+        <Text style={{ color: '#003FFA', fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>Your driver is taking you to your destination! </Text>
+        <Text style={{ color: '#003FFA', fontSize: 17, fontWeight: '500', marginTop: 30, marginBottom: 30 }}>Call 650-329-2413 if you are in danger. </Text>
+        </View>
+      
     </View>
   );
 }

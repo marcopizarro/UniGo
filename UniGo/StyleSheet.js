@@ -311,6 +311,7 @@ export const styles = StyleSheet.create({
     elevation: 8, // This adds depth to the button on 
   },
   map: {
+    top: -80,
     height: '80%',
     width: '100%'
   },

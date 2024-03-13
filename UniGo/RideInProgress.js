@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { db } from './firebaseConfig';
 import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
 import { useState } from 'react';
@@ -72,14 +72,19 @@ export default function RideInProgress({ route, navigation }) {
                     }
                     {data.status === "DriverIsWaiting" &&
                         <>
-                            <Text>Driver is waiting for you</Text>
-                            <Text>Time left: {formatTime(timeLeft)}</Text>
+                            <Text style={{ color: 'black',  fontWeight: '800', fontSize: 30, marginBottom: 30 }}>Driver is waiting for you!</Text>
+                            <Text style={{ color: 'black',  fontWeight: '600', fontSize: 18, marginBottom: 30 }}>The driver will leave after 5 minutes</Text>
+                            <Text style={{ color: '#003FFA',  fontWeight: '600', fontSize: 20, marginBottom: 30 }}>Time left: {formatTime(timeLeft)}</Text>
                           
                             <TouchableOpacity
                                     onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
-                                    style={styles.button}
+                                    style={styles.chatButton}
                         >
-                          <Text style={styles.buttonText}>Text Driver</Text>
+                        <Image
+                            source={require('./assets/bw_chat.png')} 
+                            style={{width: 35, height: 20, marginRight: 10}}
+                            />
+                        <Text style={styles.buttonText}>Text Driver</Text>
                         </TouchableOpacity>
                         
                         </>
