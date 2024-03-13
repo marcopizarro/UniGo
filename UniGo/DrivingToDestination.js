@@ -10,7 +10,7 @@ import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export default function DrivingToDestination({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName, firstName, lastName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
     const [destinationName, setDestinationName] = useState('');
@@ -99,7 +99,7 @@ export default function DrivingToDestination({ route, navigation }) {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
             <MapView
                 style={styles.mapDriver}
                 mapType="mutedStandard"
@@ -140,8 +140,9 @@ export default function DrivingToDestination({ route, navigation }) {
 
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
+            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -20, textAlign: 'left' }}>{firstName} {lastName}</Text>
 
-            <Text style={{ color: '#736CC1', fontSize: 15, fontWeight: 'bold', marginBottom: 50, marginTop: -20 }}>Drop off at {destinationName.name}</Text>
+            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 50, marginTop: -20 }}>Drop off at {destinationName.name}</Text>
 
             <TouchableOpacity
                 style={styles.welcomeDriverbutton}
@@ -152,7 +153,7 @@ export default function DrivingToDestination({ route, navigation }) {
                     navigation.navigate('RideCompleteDriver');
                 }}
             >
-                <Text style={styles.submitButtonText}>End Trip</Text>
+                <Text style={styles.buttonText}>End Trip</Text>
             </TouchableOpacity>
         </View>
     );
