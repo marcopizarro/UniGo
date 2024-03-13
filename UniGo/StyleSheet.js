@@ -520,5 +520,10 @@ export const styles = StyleSheet.create({
     // Android elevation
     elevation: 8, // This adds depth to the button on 
   },
+  mapWaitingForDriverScreen:{
+    height: '80%',
+    width: '100%',
+    top:-60,
+  },
 
 });
