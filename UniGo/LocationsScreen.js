@@ -31,7 +31,6 @@ export default function LocationsScreen() {
   const [pickup, setPickup] = useState('');
   const [dropoff, setDropoff] = useState('');
   const mapRef = useRef(null);
-  const [showDirections, setShowDirections] = useState(false);
   const [passengers, setPassengers] = useState('1'); // Default to 1 passenger
   const handlePickup = () => {
     console.log('Pickup', { pickup });
@@ -61,7 +60,7 @@ export default function LocationsScreen() {
   }, []);
 
     /*Padding stuff for the zoom in to final route*/
-    const edgePaddingValue = 10;
+    const edgePaddingValue = 100;
     const edgePadding = {
       top: edgePaddingValue,
       right: edgePaddingValue,
@@ -69,7 +68,7 @@ export default function LocationsScreen() {
       left: edgePaddingValue
     };
 
-  /*After setting the pickup and/or dropoff location move to the location*/
+  /*After setting the pickup and/or dropoff location move to the location individually.*/
   const moveTo = async (position) => {
     const camera = await mapRef.current?.getCamera();
     if (camera) {
@@ -78,7 +77,6 @@ export default function LocationsScreen() {
     }
   };
   
-
   /*After selecting the pickup location, set the 
   pickup coordinates and move to the location*/
   const onPlaceSelectedPickup = (
@@ -88,15 +86,27 @@ export default function LocationsScreen() {
       latitude: details?.geometry.location.lat,
       longitude: details?.geometry.location.lng,
     };
+
+    //Set pickup location passed
     setPickup(position);
-    moveTo(position);
 
+    //if no dropoff location has been selected move to the individual 
+    //pickup location
+    if (dropoff === ''){
+      moveTo(position);
+    }
+
+    //else if both pick up and dropoff locations have been selected 
+    //trace the route
     if (position && dropoff) {
-      const maxLatitude = Math.max(pickup.latitude, position.latitude);
-      const minLatitude = Math.min(pickup.latitude, position.latitude);
-      const maxLongitude = Math.max(pickup.longitude, position.longitude);
-      const minLongitude = Math.min(pickup.longitude, position.longitude);
 
+      //math calculations used to fit the route in the screen
+      const maxLatitude = Math.max(dropoff.latitude, position.latitude);
+      const minLatitude = Math.min(dropoff.latitude, position.latitude);
+      const maxLongitude = Math.max(dropoff.longitude, position.longitude);
+      const minLongitude = Math.min(dropoff.longitude, position.longitude);
+
+      //fit the screen sccordingly with the given coordinates
       mapRef.current?.fitToCoordinates([
         { latitude: maxLatitude, longitude: maxLongitude }, 
         { latitude: maxLatitude, longitude: minLongitude }, 
@@ -116,15 +126,27 @@ export default function LocationsScreen() {
       latitude: details?.geometry.location.lat,
       longitude: details?.geometry.location.lng,
     };
-    setDropoff(position);
-    
 
+    //set dropoff location
+    setDropoff(position);
+
+    //if no pickup location has been selected
+    //move to the dropoff location
+    if (pickup === ''){
+      moveTo(position);
+    }
+
+    //else if both pickup and dropoff location have been
+    //selected trace the path
     if (pickup && position) {
+      
+      //math used to fit the screen accordingly
       const maxLatitude = Math.max(pickup.latitude, position.latitude);
       const minLatitude = Math.min(pickup.latitude, position.latitude);
       const maxLongitude = Math.max(pickup.longitude, position.longitude);
       const minLongitude = Math.min(pickup.longitude, position.longitude);
 
+      //fit to the screen accordingly given the coordinates
       mapRef.current?.fitToCoordinates([
         { latitude: maxLatitude, longitude: maxLongitude }, 
         { latitude: maxLatitude, longitude: minLongitude }, 
@@ -138,12 +160,6 @@ export default function LocationsScreen() {
 
   /*Trace the route after the traceroute button is pressed and zoom accordingly
   to the final route */
-  const traceRoute = (details) => {
-    onPlaceSelectedPickup(details);
-    if (pickup && details) {
-      mapRef.current?.fitToCoordinates([pickup, details], { edgePadding })
-    }
-  };
 
 
   return (
@@ -176,7 +192,7 @@ export default function LocationsScreen() {
               language: 'en', // language of the results
             }}
             fetchDetails
-            onPress={(data, details = null) => [onPlaceSelectedPickup(details) , traceRoute(details)]}
+            onPress={(data, details = null) => onPlaceSelectedPickup(details)}
             predefinedPlaces={[currentLocation]}
           />
           <GooglePlacesAutocomplete
@@ -235,7 +251,7 @@ export default function LocationsScreen() {
               handlePickup();
               navigation.navigate('AreYouOk', { pickup: pickup, destination: dropoff, passengers: passengers });
             } else {
-              alert('Please use the "Get current location" button to set the pickup location');
+              alert('Please specify pickup location, drop off location and number of passengers');
             }
           }}>
             <Text style={styles.buttonText}>Submit</Text>
