@@ -153,6 +153,7 @@ export default function LocationsScreen() {
             }}
             fetchDetails
             onPress={(data, details = null) => onPlaceSelectedDropoff(details)}
+            
           />
           <RNPickerSelect
             onValueChange={(value) => setPassengers(value)}
@@ -191,6 +192,7 @@ export default function LocationsScreen() {
                 marginTop: 5,
               },
             }}
+            
           />
 
 

@@ -43,12 +43,10 @@ export default function WelcomeScreenDriver({ navigation }) {
         setPickup(doc.data().pickupLoc);
         setDestination(doc.data().destinationLoc);
         setNoRider(false);
-
-        setUserID(doc.data().user)
-      }
-        return () => unsubscribe();
+        setUserID(doc.data().user);
+      });
     });
-
+    return () => unsubscribe();
   }
 
 
