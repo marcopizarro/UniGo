@@ -15,6 +15,17 @@ export default function RideInProgress({ route, navigation }) {
     const { pickup, destination, rideID } = route.params;
     const [data, setData] = useState(null);
     const [status, setStatus] = useState("waiting");
+    const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
+
+    useEffect(() => {
+        if (data && data.status === "DriverIsWaiting" && timeLeft > 0) {
+            const timer = setTimeout(() => {
+                setTimeLeft(timeLeft - 1);
+            }, 1000);
+            
+            return () => clearTimeout(timer);
+        }
+    }, [data, timeLeft]);
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
@@ -39,6 +50,12 @@ export default function RideInProgress({ route, navigation }) {
         });
     }
 
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {data &&
@@ -56,6 +73,7 @@ export default function RideInProgress({ route, navigation }) {
                     {data.status === "DriverIsWaiting" &&
                         <>
                             <Text>Driver is waiting for you</Text>
+                            <Text>Time left: {formatTime(timeLeft)}</Text>
                           
                             <TouchableOpacity
                                     onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
