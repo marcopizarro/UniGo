@@ -17,7 +17,6 @@ export default function WelcomeScreenDriver({ navigation }) {
   const [destination, setDestination] = useState(null);
   const [rideID, setRideID] = useState(0);
   const [userID, setUserID] = useState();
-  const [userID, setUserID] = useState();
   const [noRider, setNoRider] = useState(true);
   const driverName = auth.currentUser.uid; // TODO pull from db
 
@@ -48,6 +47,10 @@ export default function WelcomeScreenDriver({ navigation }) {
       });
     }
     );
+    return () => unsubscribe();
+        setUserID(doc.data().user);
+      });
+    });
     return () => unsubscribe();
   }
 
