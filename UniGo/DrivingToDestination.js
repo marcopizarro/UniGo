@@ -89,11 +89,21 @@ export default function DrivingToDestination({ route, navigation }) {
     useEffect(() => {
         const intervalId = setInterval(async () => {
             const { coords } = await Location.getCurrentPositionAsync({});
+            console.log("drivingtodest", coords.latitude, coords.longitude)
+
+            console.log("sent")
             setDriverPosition({
                 latitude: coords.latitude,
                 longitude: coords.longitude,
             });
-        }, 5000); // Update the position every 5 seconds
+            updateDoc(ref, {
+                driverLocation: {
+                    latitude: coords.latitude,
+                    longitude: coords.longitude,
+                }
+            });
+            
+        }, 10000); // Update the position every 5 seconds
 
         return () => clearInterval(intervalId);
     }, []);
@@ -112,8 +122,8 @@ export default function DrivingToDestination({ route, navigation }) {
             >
                 <Marker
                     coordinate={{
-                        latitude: driverLoc.latitude,
-                        longitude: driverLoc.longitude,
+                        latitude: driverPosition.latitude,
+                        longitude: driverPosition.longitude,
                     }}
                     title="Driver"
                 >

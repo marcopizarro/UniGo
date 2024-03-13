@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { collection, doc, getDoc } from "firebase/firestore";
-import { db } from "./firebaseConfig";
+import { db, auth } from "./firebaseConfig";
 import ProfileButton from './ProfileButton';
 import { getDocs, query, where, orderBy, limit, updateDoc, onSnapshot } from "firebase/firestore";
 
@@ -18,7 +18,7 @@ export default function WelcomeScreenDriver({ navigation }) {
   const [rideID, setRideID] = useState(0);
   const [userID, setUserID] = useState();
   const [noRider, setNoRider] = useState(true);
-  const driverName = "driver1"; // TODO pull from db
+  const driverName = auth.currentUser.uid; // TODO pull from db
 
 
   useEffect(() => {

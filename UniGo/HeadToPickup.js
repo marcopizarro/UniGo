@@ -60,18 +60,20 @@ export default function HeadToPickup({ route, navigation }) {
     useEffect(() => {
         const intervalId = setInterval(async () => {
             const { coords } = await Location.getCurrentPositionAsync({});
-            setDriverPosition({
-                latitude: coords.latitude,
-                longitude: coords.longitude,
-            });
-            // send coordinates to firebase
-            await updateDoc(ref, {
+            console.log("headtopuckip", coords.latitude, coords.longitude)
+            updateDoc(ref, {
                 driverLocation: {
                     latitude: coords.latitude,
                     longitude: coords.longitude,
                 },
             });
-        }, 5000); // Update the position every 5 seconds
+            setDriverPosition({
+                latitude: coords.latitude,
+                longitude: coords.longitude,
+            });
+            // send coordinates to firebase
+
+        }, 10000); // Update the position every 5 seconds
 
         return () => clearInterval(intervalId);
     }, []);
