@@ -307,13 +307,20 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'white',
+<<<<<<< HEAD
     padding: 35,
+=======
+    padding: 20,
+>>>>>>> 40421b4 (git style changes with driver side on background)
     shadowColor: 'black',
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.25,
     shadowRadius: 10,
     elevation: 5,
+<<<<<<< HEAD
     alignContent: 'center',
+=======
+>>>>>>> 40421b4 (git style changes with driver side on background)
 },
   selectedButton: {
     backgroundColor: '#003FFA', //darker
