@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  headline1:{
+  headline1: {
     fontSize: 25,
     marginBottom: 60,
     color: '#167DEB',
@@ -65,11 +65,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.5, // Shadow opacity
     shadowRadius: 4, // Shadow blur radius
-  // Android elevation
-  elevation: 8, // This adds depth to the button on 
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
   },
   buttonText: {
     color: 'black',
@@ -89,18 +89,18 @@ export const styles = StyleSheet.create({
   },
 
   submitButton: {
-    backgroundColor: 'black', 
-    borderColor: 'black', 
-    borderWidth: 1, 
-    borderRadius: 17, 
-    padding:17, 
-    margin:30,
+    backgroundColor: 'black',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 17,
+    padding: 17,
+    margin: 30,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.3, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
-  // Android elevation
-  elevation: 8, // This adds depth to the button on 
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
   },
 
   submitButtonText: {
@@ -114,7 +114,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  
+
   requestbutton: {
     backgroundColor: 'black',
     borderColor: '#003FFA',
@@ -125,11 +125,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 120,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
-  // Android elevation
-  elevation: 8, // This adds depth to the button on 
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
   },
   welcomeDriverbutton: {
     backgroundColor: '#D6E4FF',
@@ -141,7 +141,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -157,7 +157,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -173,7 +173,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -190,7 +190,7 @@ export const styles = StyleSheet.create({
     width: '45%',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -207,7 +207,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -223,7 +223,39 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  arrivedbutton: {
+    backgroundColor: '#D6E4FF',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  arrivedbutton: {
+    backgroundColor: '#D6E4FF',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -239,13 +271,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
     elevation: 8, // This adds depth to the button on 
   },
-  
+
   cancelbutton: {
     backgroundColor: '#FF7A7A',
     borderColor: 'black',
@@ -256,7 +288,39 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  cancelbutton: {
+    backgroundColor: '#D22B2B',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  cancelbutton: {
+    backgroundColor: '#D22B2B',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -284,7 +348,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
     alignContent: 'center',
-},
+  },
   selectedButton: {
     backgroundColor: '#003FFA', //darker
     borderColor: 'black',
@@ -295,7 +359,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 6}, // Shadow position
+    shadowOffset: { width: 0, height: 6 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
@@ -358,7 +422,7 @@ export const styles = StyleSheet.create({
   },
 
   sitOverlay: {
-    backgroundColor: 'black', borderColor: 'black', borderWidth: 1, borderRadius: 5, margin:10,
+    backgroundColor: 'black', borderColor: 'black', borderWidth: 1, borderRadius: 5, margin: 10,
     position: "absolute",
     bottom: 50,
     padding: 16,
@@ -379,7 +443,7 @@ export const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 8,
     top: Constants.statusBarHeight,
-    
+
   },
 
   LocationsButton: {
@@ -404,57 +468,57 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     tintColor: 'white'
-},
-buttonContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  position: 'absolute',
-  bottom: 20,
-  left: 20,
-  right: 20,
-},
-headToPickupContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  position: 'absolute',
-  bottom: 100,
-  left: 20,
-  right: 20,
-},
-startTripContainer: {
-  flexDirection: 'row',
-  justifyContent: 'center',
-  position: 'absolute',
-  bottom: 20,
-  left: '5%',
-  right: '5%',
-  width: '90%',
-},
-startTripbutton: {
-  backgroundColor: 'black',
-  borderColor: 'black',
-  borderWidth: 2,
-  padding: 15,
-  borderRadius: 15,
-  width: '97%',
-  alignItems: 'center',
-  margin: 10,
-  shadowColor: '#000', 
-  shadowOffset: { width: 0, height: 4}, 
-  shadowOpacity: 0.3, 
-  shadowRadius: 7, 
-  elevation: 8, 
-  alignSelf: 'center' 
-},
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+  },
+  headToPickupContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: 100,
+    left: 20,
+    right: 20,
+  },
+  startTripContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    left: '5%',
+    right: '5%',
+    width: '90%',
+  },
+  startTripbutton: {
+    backgroundColor: 'black',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '97%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 8,
+    alignSelf: 'center'
+  },
 
-startTripButtonText: {
-  color: 'white',
-  fontWeight: '800',
-  fontSize: 18,
-},
+  startTripButtonText: {
+    color: 'white',
+    fontWeight: '800',
+    fontSize: 18,
+  },
 
-endButton: {
-  backgroundColor: 'black',
+  endButton: {
+    backgroundColor: 'black',
     borderColor: 'black',
     borderWidth: 2,
     padding: 15,
@@ -464,11 +528,11 @@ endButton: {
     marginTop: 20,
     marginBottom: 20,
     shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOffset: { width: 0, height: 4 }, // Shadow position
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 7, // Shadow blur radius
     // Android elevation
     elevation: 8, // This adds depth to the button on 
-},
+  },
 
 });
