@@ -19,11 +19,12 @@ export default function HeadToPickup({ route, navigation }) {
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
-            console.log("Current data: ", doc.data());
+            // console.log("Current data: ", doc.data());
             if (doc.exists()) {
                 if (doc.data().status === "DroppedOff") {
                     unsub();
                 }
+                console.log("doc.data", doc.data().driverLocation)
                 setData(doc.data());
                 setRef(doc.ref);
             } else {
@@ -56,12 +57,25 @@ export default function HeadToPickup({ route, navigation }) {
         fetchRouteCoordinates();
     }, []);
 
+    function setIntervalWithPromise(target) {
+        return async function (...args) {
+            if (target.isRunning) return
+
+            // if we are here, we can invoke our callback!
+            target.isRunning = true
+            await target(...args)
+            target.isRunning = false
+        }
+    }
+
+    
+
     // Update driver's position with current location and fetch updated route coordinates in intervals
     useEffect(() => {
-        const intervalId = setInterval(async () => {
+        const intervalId = setInterval(setIntervalWithPromise(async () => {
             const { coords } = await Location.getCurrentPositionAsync({});
-            console.log("headtopuckip", coords.latitude, coords.longitude)
-            updateDoc(ref, {
+            // console.log("headtopuckip", coords.latitude, coords.longitude)
+            await updateDoc(ref, {
                 driverLocation: {
                     latitude: coords.latitude,
                     longitude: coords.longitude,
@@ -71,9 +85,11 @@ export default function HeadToPickup({ route, navigation }) {
                 latitude: coords.latitude,
                 longitude: coords.longitude,
             });
+            console.log("sent")
+            console.log("driverLoc", coords.latitude, coords.longitude)
             // send coordinates to firebase
 
-        }, 10000); // Update the position every 5 seconds
+        }), 5000); // Update the position every 5 seconds
 
         return () => clearInterval(intervalId);
     }, []);

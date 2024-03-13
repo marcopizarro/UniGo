@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { styles } from './StyleSheet'; // Adjust the path to your styles file
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
-import MapView, { Marker, Polyline} from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import polyline from 'polyline';
 import ProfileButton from './ProfileButton';
 import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
@@ -19,12 +19,13 @@ export default function DrivingToDestination({ route, navigation }) {
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
-            console.log("Current data: ", doc.data());
+            // console.log("Current data: ", doc.data());
             if (doc.exists()) {
                 if (doc.data().status === "DroppedOff") {
                     unsub();
                 }
                 setData(doc.data());
+                console.log("Adoc.data", doc.data().driverLocation)
                 setRef(doc.ref);
             } else {
                 console.log("No such document!");
@@ -39,23 +40,23 @@ export default function DrivingToDestination({ route, navigation }) {
         console.log(destinationLatitude);
         console.log(destinationLongitude);
         try {
-          const location = await Location.reverseGeocodeAsync({
-            latitude: destinationLatitude,
-            longitude: destinationLongitude,
-          });
-      
-          // The location object contains the address components, including the name
-          let str1 = location[0].name;
-          let str2 = location[0].street;
-          let result = str1 + " " + str2;
-          console.log(result);
+            const location = await Location.reverseGeocodeAsync({
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+            });
 
-          setDestinationName({
-            name: result,
-          });
-          
+            // The location object contains the address components, including the name
+            let str1 = location[0].name;
+            let str2 = location[0].street;
+            let result = str1 + " " + str2;
+            console.log(result);
+
+            setDestinationName({
+                name: result,
+            });
+
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
     };
 
@@ -85,25 +86,37 @@ export default function DrivingToDestination({ route, navigation }) {
     }, []);
 
 
+    function setIntervalWithPromise(target) {
+        return async function (...args) {
+            if (target.isRunning) return
+
+            // if we are here, we can invoke our callback!
+            target.isRunning = true
+            await target(...args)
+            target.isRunning = false
+        }
+    }
+
     // Update driver's position with current location and fetch updated route coordinates in intervals
     useEffect(() => {
-        const intervalId = setInterval(async () => {
+        const intervalId = setInterval(setIntervalWithPromise(async () => {
             const { coords } = await Location.getCurrentPositionAsync({});
-            console.log("drivingtodest", coords.latitude, coords.longitude)
-
-            console.log("sent")
+            // console.log("headtopuckip", coords.latitude, coords.longitude)
+            await updateDoc(ref, {
+                driverLocation: {
+                    latitude: coords.latitude,
+                    longitude: coords.longitude,
+                },
+            });
             setDriverPosition({
                 latitude: coords.latitude,
                 longitude: coords.longitude,
             });
-            updateDoc(ref, {
-                driverLocation: {
-                    latitude: coords.latitude,
-                    longitude: coords.longitude,
-                }
-            });
-            
-        }, 10000); // Update the position every 5 seconds
+            console.log("Asent")
+            console.log("AdriverLoc", coords.latitude, coords.longitude)
+            // send coordinates to firebase
+
+        }), 5000); // Update the position every 5 seconds
 
         return () => clearInterval(intervalId);
     }, []);

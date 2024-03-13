@@ -25,7 +25,7 @@ export default function AcceptRide({ route, navigation }) {
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
-            console.log("Current data: ", doc.data());
+            // console.log("Current data: ", doc.data());
             if (doc.exists()) {
                 if (doc.data().status === "DroppedOff") {
                     unsub();
