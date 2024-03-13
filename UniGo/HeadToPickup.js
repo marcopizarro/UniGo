@@ -210,6 +210,7 @@ export default function HeadToPickup({ route, navigation }) {
             </View>
         )
         }
+
         </View>
     );
 }

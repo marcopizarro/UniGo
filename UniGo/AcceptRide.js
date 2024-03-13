@@ -148,6 +148,7 @@ export default function AcceptRide({ route, navigation }) {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
+
             <MapView
                 style={styles.mapAcceptRide}
                 mapType="mutedStandard"
@@ -229,6 +230,7 @@ export default function AcceptRide({ route, navigation }) {
                         <Text style={styles.submitButtonText}>Decline</Text>
                     </TouchableOpacity>
                 </View>
+
             </View>
 
         </View>

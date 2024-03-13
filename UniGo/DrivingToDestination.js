@@ -10,7 +10,8 @@ import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export default function DrivingToDestination({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName, firstName, lastName, firstName, lastName } = route.params;
+
+    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName, firstName, lastName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
     const [destinationName, setDestinationName] = useState('');
@@ -178,6 +179,7 @@ export default function DrivingToDestination({ route, navigation }) {
                     <Text style={styles.submitButtonText}>End Trip</Text>
                 </TouchableOpacity>
             </View>
+
         </View>
     );
 }

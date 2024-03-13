@@ -17,6 +17,7 @@ export default function RideCompleteDriver({ navigation }) {
 
       <TouchableOpacity style={styles.nextRidebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
         <Text style={styles.submitButtonText}>Next Ride</Text>
+
       </TouchableOpacity>
     </View>
     
