@@ -223,7 +223,7 @@ export default function AcceptRide({ route, navigation }) {
                             });
                         }}
                     >
-                        <Text style={styles.buttonText}>Accept</Text>
+                        <Text style={styles.submitButtonText}>Accept</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.declinebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
                         <Text style={styles.submitButtonText}>Decline</Text>
