@@ -147,6 +147,22 @@ export const styles = StyleSheet.create({
     // Android elevation
     elevation: 8, // This adds depth to the button on 
   },
+  nextRidebutton: {
+    backgroundColor: '#003FFA',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '70%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
   acceptRidebutton: {
     backgroundColor: 'black',
     borderColor: 'black',
