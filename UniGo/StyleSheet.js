@@ -25,7 +25,12 @@ export const styles = StyleSheet.create({
     color: '#167DEB',
     fontWeight: 'bold',
   },
-
+  buttonContainer: {
+    marginBottom: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '80%',
+  },
   text: {
     fontSize: 20,
     marginBottom: 20,
@@ -36,7 +41,7 @@ export const styles = StyleSheet.create({
     width: 300,
     padding: 10, // Add some padding inside the text inputs
     borderWidth: 1, // Optional: add a border
-    borderColor: '#ddd', // Optional: set the border color, light grey for subtle effect
+    borderColor: 'black', // Optional: set the border color, light grey for subtle effect
     marginBottom: 25, // Add some space between the inputs
     // Additional styles for the "bubble" effect
     shadowColor: "#000", // Shadow for iOS
@@ -72,7 +77,7 @@ export const styles = StyleSheet.create({
   },
 
   areYouOkButton: {
-    backgroundColor: '#C9E2FF', 
+    backgroundColor: '#C9E2FF', //A
     borderColor: 'black',
     borderWidth: 2,
     padding: 14,
@@ -265,6 +270,21 @@ export const styles = StyleSheet.create({
     left: "25%",
     width: "50%",
     textAlign: 'center',
+  },
+
+  imageUploadBtn: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 50,
+    marginTop: 50,
+    overflow: 'hidden',
+  },
+  imagePreview: {
+    width: '100%',
+    height: '100%',
   },
 
   submitOverlay: {
