@@ -117,7 +117,7 @@ const AccountScreenDriver = () => {
         editable={isEditMode}
       />
       <TextInput
-        placeholder="CarType"
+        placeholder="Car Type"
         value={carType}
         onChangeText={setCarType}
         style={styles.input}
