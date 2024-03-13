@@ -310,38 +310,6 @@ export const styles = StyleSheet.create({
     // Android elevation
     elevation: 8, // This adds depth to the button on 
   },
-  cancelbutton: {
-    backgroundColor: '#D22B2B',
-    borderColor: 'black',
-    borderWidth: 2,
-    padding: 15,
-    borderRadius: 15,
-    width: '95%',
-    alignItems: 'center',
-    margin: 10,
-    shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4 }, // Shadow position
-    shadowOpacity: 0.2, // Shadow opacity
-    shadowRadius: 7, // Shadow blur radius
-    // Android elevation
-    elevation: 8, // This adds depth to the button on 
-  },
-  cancelbutton: {
-    backgroundColor: '#D22B2B',
-    borderColor: 'black',
-    borderWidth: 2,
-    padding: 15,
-    borderRadius: 15,
-    width: '45%',
-    alignItems: 'center',
-    margin: 10,
-    shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4 }, // Shadow position
-    shadowOpacity: 0.2, // Shadow opacity
-    shadowRadius: 7, // Shadow blur radius
-    // Android elevation
-    elevation: 8, // This adds depth to the button on 
-  },
   map: {
     height: '80%',
     width: '100%'
