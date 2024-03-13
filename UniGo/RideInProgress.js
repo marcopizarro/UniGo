@@ -32,6 +32,13 @@ export default function RideInProgress({ route, navigation }) {
         return () => unsub();
     }, []);
 
+    function sendToMainScreen() {
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'WelcomeScreen' }],
+        });
+    }
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {data &&
@@ -66,7 +73,7 @@ export default function RideInProgress({ route, navigation }) {
                     }
                     {data.status === "DroppedOff" &&
                         <>
-                            <RideCompletedScreen />
+                            <RideCompletedScreen sendToMainScreen={sendToMainScreen} />
                         </>
                     }
                 </>

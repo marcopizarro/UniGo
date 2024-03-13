@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { styles } from './StyleSheet';
 
-export default function RideCompletedScreen({ navigation }) {
+export default function RideCompletedScreen({sendToMainScreen}) {
   return (
     <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
     <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 30, padding: 10}}>Your ride has been completed!</Text>
@@ -14,10 +14,7 @@ export default function RideCompletedScreen({ navigation }) {
     <TouchableOpacity
       style={styles.submitButton}
       onPress={() => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'WelcomeScreen' }],
-        });
+        sendToMainScreen();
       }}
       >
       <Text style={styles.submitButtonText}>Done!</Text>

@@ -164,33 +164,35 @@ export default function LocationsScreen() {
               { label: '5 passengers', value: '5' },
             ]}
 
-        useNativeAndroidPickerStyle={false} // disable the native Android style
-        placeholder={{
-            label: 'Select Number of Passengers...',
-            value: null,
-        }}
-        style={{ inputIOS: {
-          fontSize: 15,
-          padding: 10,
-          borderWidth: 1,
-          borderColor: 'white',
-          borderRadius: 4,
-          color: 'black',
-          backgroundColor: 'white',
-          marginTop: 5, 
-        },
-        inputAndroid: {
-        fontSize: 15,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 4,
-        color: 'black',
-        backgroundColor: 'white',
-        marginTop: 5, 
-        },
-      }}
-    />
+            useNativeAndroidPickerStyle={false} // disable the native Android style
+            placeholder={{
+              label: 'Select Number of Passengers...',
+              value: null,
+            }}
+            style={{
+              inputIOS: {
+                fontSize: 15,
+                padding: 10,
+                borderWidth: 1,
+                borderColor: 'white',
+                borderRadius: 4,
+                color: 'black',
+                backgroundColor: 'white',
+                marginTop: 5,
+              },
+              inputAndroid: {
+                fontSize: 15,
+                padding: 10,
+                borderWidth: 1,
+                borderColor: 'gray',
+                borderRadius: 4,
+                color: 'black',
+                backgroundColor: 'white',
+                marginTop: 5,
+              },
+            }}
+          />
+
 
           <TouchableOpacity style={styles.button} onPress={() => {
             if (pickup && dropoff) {
