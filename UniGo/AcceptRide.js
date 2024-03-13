@@ -37,7 +37,7 @@ export default function AcceptRide({ route, navigation }) {
             }
         });
 
-       
+
 
         return () => unsub();
     }, []);
@@ -99,22 +99,22 @@ export default function AcceptRide({ route, navigation }) {
         const usersDocRef = doc(db, "users", userID);
         console.log('USER ID')
         try {
-        const docSnap = await getDoc(usersDocRef);
-        if (docSnap.exists()) {
-            // Retrieve the data from the document
-            const userData = docSnap.data();
-            // Now you can work with userData, it contains the document data
-            console.log('USER DATA!!')
-            console.log(userData);
-            console.log('DATA ABOVE!!!!')
-            setFirstName(userData.firstName)
-            setLastName(userData.lastName)
-            setNumber(userData.phoneNumber)
-        } else {
-            console.log('Document does not exist');
-        }
+            const docSnap = await getDoc(usersDocRef);
+            if (docSnap.exists()) {
+                // Retrieve the data from the document
+                const userData = docSnap.data();
+                // Now you can work with userData, it contains the document data
+                console.log('USER DATA!!')
+                console.log(userData);
+                console.log('DATA ABOVE!!!!')
+                setFirstName(userData.firstName)
+                setLastName(userData.lastName)
+                setNumber(userData.phoneNumber)
+            } else {
+                console.log('Document does not exist');
+            }
         } catch (error) {
-        console.error('Error getting document:', error);
+            console.error('Error getting document:', error);
         }
 
     }
@@ -147,7 +147,7 @@ export default function AcceptRide({ route, navigation }) {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}>
 
             <MapView
                 style={styles.mapAcceptRide}
@@ -191,13 +191,13 @@ export default function AcceptRide({ route, navigation }) {
                 {/* ProfileButton component added to the header
                 <ProfileButton navigation={navigation} /> */}
                 <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 10, marginBottom: 10, textAlign: 'left' }}>{firstName} {lastName}</Text>
-                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30}}> {number}</Text>
+                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30 }}> {number}</Text>
 
                 <Text style={{ color: '#167DEB', fontSize: 17, fontWeight: 'bold' }}> Pick up at:  </Text>
-                <Text style={{ color: '#167DEB', fontSize: 15,  marginBottom: 15}}> {pickupName.name} </Text>
+                <Text style={{ color: '#167DEB', fontSize: 15, marginBottom: 15 }}> {pickupName.name} </Text>
 
                 <Text style={{ color: '#167DEB', fontSize: 17, fontWeight: 'bold' }}> Drop off at: </Text>
-                <Text style={{ color: '#167DEB', fontSize: 15, marginLeft: 5, marginBottom: 100}}> {destinationName.name} </Text>
+                <Text style={{ color: '#167DEB', fontSize: 15, marginLeft: 5, marginBottom: 100 }}> {destinationName.name} </Text>
 
 
                 <View style={styles.buttonContainer}>
@@ -208,9 +208,11 @@ export default function AcceptRide({ route, navigation }) {
                                 navigation.goBack()
                             }
                             await updateDoc(ref, {
+                                driverLocation: driverLoc,
                                 status: "WaitingForDriver",
-                                driver: driverName
+                                driver: driverName,
                             });
+                            await add
                             navigation.navigate('HeadToPickup', {
                                 driverLoc: driverLoc,
                                 pickupLoc: pickupLoc,
