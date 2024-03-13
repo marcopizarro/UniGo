@@ -50,7 +50,7 @@ export default function RideInProgress({ route, navigation }) {
                     }
                     {data.status === "WaitingForDriver" &&
                         <>
-                            <WaitingForDriverScreen pickup={pickup} destination={destination} driverLocation={data.driverLocation}/>
+                            <WaitingForDriverScreen uid={data.driver} pickup={pickup} destination={destination} driverLocation={data.driverLocation} rideID={rideID}/>
                         </>
                     }
                     {data.status === "DriverIsWaiting" &&
@@ -68,7 +68,7 @@ export default function RideInProgress({ route, navigation }) {
                     }
                     {data.status === "InTransit" &&
                         <>
-                            <DrivingHomeScreen pickup={pickup} destination={destination} />
+                            <DrivingHomeScreen pickup={pickup} destination={destination} driverLocation={data.driverLocation} rideID={rideID}/>
                         </>
                     }
                     {data.status === "DroppedOff" &&

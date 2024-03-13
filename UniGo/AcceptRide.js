@@ -203,8 +203,10 @@ export default function AcceptRide({ route, navigation }) {
                         }
                         await updateDoc(ref, {
                             status: "WaitingForDriver",
-                            driver: driverName
+                            driver: driverName,
+                            driverLocation: driverLoc
                         });
+
                         navigation.navigate('HeadToPickup', {
                             driverLoc: driverLoc,
                             pickupLoc: pickupLoc,
