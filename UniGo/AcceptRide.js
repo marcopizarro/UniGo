@@ -212,7 +212,6 @@ export default function AcceptRide({ route, navigation }) {
                                 status: "WaitingForDriver",
                                 driver: driverName,
                             });
-                            await add
                             navigation.navigate('HeadToPickup', {
                                 driverLoc: driverLoc,
                                 pickupLoc: pickupLoc,
