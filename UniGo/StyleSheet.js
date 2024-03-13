@@ -296,7 +296,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
     borderRadius: 15,
-    width: '95%',
+    width: '45%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
