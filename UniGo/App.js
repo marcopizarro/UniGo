@@ -123,7 +123,6 @@ export default function App() {
                     <Stack.Screen name="RideInProgress" component={RideInProgress} />
                     <Stack.Screen name="AccountScreenUser" component={AccountScreenUser} />
                     <Stack.Screen name="ChatScreen" component={ChatScreen} />
-                    <Stack.Screen name="ChatScreen" component={ChatScreen} />
                     <Stack.Screen name="Profile">
                       {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
                     </Stack.Screen>

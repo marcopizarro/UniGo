@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { Dimensions } from 'react-native';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import Constants from 'expo-constants';
 import { GooglePlacesAutocomplete, GooglePlaceDetail } from 'react-native-google-places-autocomplete';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
