@@ -65,7 +65,7 @@ export default function WelcomeScreenDriver({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff', backgroundColor: '#ffff' }}>
       {
         !(driverLoc && driverName || (rideID && destination && pickup && driverLoc && driverName)) ?
           <ActivityIndicator size="large" color="#95A2F1" />
