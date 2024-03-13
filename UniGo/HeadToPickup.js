@@ -119,7 +119,7 @@ export default function HeadToPickup({ route, navigation }) {
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
             <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -120, textAlign: 'left' }}>{firstName} {lastName}</Text>
-            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
+            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}> {number}</Text>
             {data &&
                 <>
                     <View style={styles.headToPickupContainer}>
