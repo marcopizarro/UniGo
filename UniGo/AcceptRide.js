@@ -147,7 +147,8 @@ export default function AcceptRide({ route, navigation }) {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
+
             <MapView
                 style={styles.mapAcceptRide}
                 mapType="mutedStandard"
@@ -185,46 +186,51 @@ export default function AcceptRide({ route, navigation }) {
                     />
                 )}
             </MapView>
+            <View style={styles.overlayContainer}>
 
-            {/* ProfileButton component added to the header
-            <ProfileButton navigation={navigation} /> */}
-            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -20, textAlign: 'left' }}>{firstName} {lastName}</Text>
-            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
+                {/* ProfileButton component added to the header
+                <ProfileButton navigation={navigation} /> */}
+                <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 10, marginBottom: 10, textAlign: 'left' }}>{firstName} {lastName}</Text>
+                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30}}> {number}</Text>
 
-            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 15, marginTop: -20 }}>Pick up at {pickupName.name}</Text>
-            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 50 }}>Drop off at {destinationName.name}</Text>
+                <Text style={{ color: '#167DEB', fontSize: 17, fontWeight: 'bold' }}> Pick up at:  </Text>
+                <Text style={{ color: '#167DEB', fontSize: 15,  marginBottom: 15}}> {pickupName.name} </Text>
 
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    style={styles.acceptRidebutton}
-                    onPress={async () => {
-                        if (data.status !== "waiting") {
-                            navigation.goBack()
-                        }
-                        await updateDoc(ref, {
-                            status: "WaitingForDriver",
-                            driver: driverName,
-                            driverLocation: driverLoc
-                        });
+                <Text style={{ color: '#167DEB', fontSize: 17, fontWeight: 'bold' }}> Drop off at: </Text>
+                <Text style={{ color: '#167DEB', fontSize: 15, marginLeft: 5, marginBottom: 100}}> {destinationName.name} </Text>
 
-                        navigation.navigate('HeadToPickup', {
-                            driverLoc: driverLoc,
-                            pickupLoc: pickupLoc,
-                            destinationLoc: destinationLoc,
-                            destinationName: destinationName,
-                            rideID: rideID,
-                            driverName: driverName,
-                            firstName,
-                            lastName,
-                            number
-                        });
-                    }}
-                >
-                    <Text style={styles.buttonText}>Accept</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.declinebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
-                    <Text style={styles.submitButtonText}>Decline</Text>
-                </TouchableOpacity>
+
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        style={styles.acceptRidebutton}
+                        onPress={async () => {
+                            if (data.status !== "waiting") {
+                                navigation.goBack()
+                            }
+                            await updateDoc(ref, {
+                                status: "WaitingForDriver",
+                                driver: driverName
+                            });
+                            navigation.navigate('HeadToPickup', {
+                                driverLoc: driverLoc,
+                                pickupLoc: pickupLoc,
+                                destinationLoc: destinationLoc,
+                                destinationName: destinationName,
+                                rideID: rideID,
+                                driverName: driverName,
+                                firstName,
+                                lastName,
+                                number
+                            });
+                        }}
+                    >
+                        <Text style={styles.submitButtonText}>Accept</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.declinebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
+                        <Text style={styles.submitButtonText}>Decline</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
 
         </View>

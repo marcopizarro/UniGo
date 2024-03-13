@@ -134,76 +134,83 @@ export default function HeadToPickup({ route, navigation }) {
                 )}
             </MapView>
 
-            {/* ProfileButton component added to the header
-            <ProfileButton navigation={navigation} /> */}
-            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -220 }}>
-                <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 15 }}>{firstName} {lastName}</Text>
-                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30 }}>phone number: {number}</Text>
-            </View>
-            {data &&
+
+            {data &&(
+            <View style={styles.overlayContainer}>
+            {/* Name and Number Display */}
+            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 15 }}>
+                {firstName} {lastName}
+            </Text>
+            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30 }}>
+                {number}
+            </Text>
+            
+            {/* Conditional Rendering based on data.status */}
+            {data.status !== "DriverIsWaiting" && (
+                <TouchableOpacity
+                style={styles.arrivedbutton}
+                onPress={async () => {
+                    await updateDoc(ref, {
+                    status: "DriverIsWaiting",
+                    });
+                }}
+                >
+                <Text style={styles.buttonText}>I've arrived</Text>
+                </TouchableOpacity>
+            )}
+            
+            {data.status === "DriverIsWaiting" && (
                 <>
-                    <View style={styles.headToPickupContainer}>
-                        {data.status !== "DriverIsWaiting" &&
-                            <TouchableOpacity
-                                style={styles.arrivedbutton}
-                                onPress={async () => {
-                                    await updateDoc(ref, {
-                                        status: "DriverIsWaiting",
-                                    });
-                                }}
-                            >
-                                <Text style={styles.buttonText}>I've arrived</Text>
-                            </TouchableOpacity>
-                        }
-                        {data.status === "DriverIsWaiting" &&
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity 
+                    style={styles.cancelbutton} 
+                    onPress={async () => {
+                        await updateDoc(ref, {
+                        status: "RiderNotHere",
+                        });
+                        navigation.navigate('WelcomeScreenDriver');
+                    }}
+                    >
+                    <Text style={styles.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
 
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity style={styles.cancelbutton} onPress={async () => {
+                    <TouchableOpacity
+                    onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
+                    style={styles.chatButton}
+                    >
+                    <Image
+                        source={require('./assets/bw_chat.png')} 
+                        style={{width: 35, height: 20, marginRight: 10}}
+                    />
+                    <Text style={styles.buttonText}>Chat</Text>
+                    </TouchableOpacity>
+                </View>
 
-                                    await updateDoc(ref, {
-                                        status: "RiderNotHere",
-                                    });
-                                    navigation.navigate('WelcomeScreenDriver');
-                                }}>
-                                    <Text style={styles.submitButtonText}>Rider Not Here</Text>
-                                </TouchableOpacity>
+                    <TouchableOpacity
+                    style={styles.startTripbutton}
+                    onPress={async () => {
+                        await updateDoc(ref, {
+                        status: "InTransit",
+                        });
+                        navigation.navigate('DrivingToDestination', {
+                        driverLoc,
+                        pickupLoc,
+                        destinationLoc,
+                        rideID,
+                        driverName,
+                        firstName,
+                        lastName,
+                        });
+                    }}
+                    >
+                    <Text style={styles.startTripButtonText}>Start Trip</Text>
+                    </TouchableOpacity>
+                </>
+            )}
+            </View>
+        )
+        }
 
-
-                                <TouchableOpacity
-                                    onPress={() => navigation.navigate("ChatScreen", { rideID: rideID })}
-                                    style={styles.acceptRidebutton}
-                                >
-                                    <Text style={styles.buttonText}>Go chat</Text>
-                                </TouchableOpacity>
-
-                            </View>
-
-                        }
-                    </View>
-                    {data.status === "DriverIsWaiting" &&
-                        <View style={styles.startTripContainer}>
-                            <TouchableOpacity
-                                style={styles.startTripbutton}
-                                onPress={async () => {
-                                    await updateDoc(ref, {
-                                        status: "InTransit",
-                                    });
-                                    navigation.navigate('DrivingToDestination', {
-                                        driverLoc: driverLoc,
-                                        pickupLoc: pickupLoc,
-                                        destinationLoc: destinationLoc,
-                                        rideID,
-                                        driverName,
-                                        firstName,
-                                        lastName,
-                                    });
-                                }}
-                            >
-                                <Text style={styles.buttonText}>Start Trip</Text>
-                            </TouchableOpacity>
-                        </View>
-                    }
-                </>}
         </View>
     );
 }

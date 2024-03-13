@@ -10,6 +10,7 @@ import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export default function DrivingToDestination({ route, navigation }) {
+
     const { driverLoc, pickupLoc, destinationLoc, rideID, driverName, firstName, lastName } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
@@ -160,24 +161,25 @@ export default function DrivingToDestination({ route, navigation }) {
                     />
                 )}
             </MapView>
+            <View style={styles.overlayContainer}>
+                <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -20, textAlign: 'left' }}>{firstName} {lastName}</Text>
 
-            {/* ProfileButton component added to the header
-            <ProfileButton navigation={navigation} /> */}
-            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -20, textAlign: 'left' }}>{firstName} {lastName}</Text>
+                <Text style={{ color: '#167DEB', fontSize: 17, fontWeight: 'bold' }}> Drop off at: </Text>
+                <Text style={{ color: '#167DEB', fontSize: 15, marginLeft: 5, marginBottom: 10}}> {destinationName.name} </Text>
 
-            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 50, marginTop: -20 }}>Drop off at {destinationName.name}</Text>
+                <TouchableOpacity
+                    style={styles.endButton}
+                    onPress={async () => {
+                        await updateDoc(ref, {
+                            status: "DroppedOff",
+                        });
+                        navigation.navigate('RideCompleteDriver');
+                    }}
+                >
+                    <Text style={styles.submitButtonText}>End Trip</Text>
+                </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity
-                style={styles.welcomeDriverbutton}
-                onPress={async () => {
-                    await updateDoc(ref, {
-                        status: "DroppedOff",
-                    });
-                    navigation.navigate('RideCompleteDriver');
-                }}
-            >
-                <Text style={styles.buttonText}>End Trip</Text>
-            </TouchableOpacity>
         </View>
     );
 }
