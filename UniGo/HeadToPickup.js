@@ -119,11 +119,7 @@ export default function HeadToPickup({ route, navigation }) {
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
             <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -120, textAlign: 'left' }}>{firstName} {lastName}</Text>
-<<<<<<< HEAD
             <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}> {number}</Text>
-=======
-            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
->>>>>>> 097b309 (Styling changes for driver screens and adding passenger name and number to driver screen)
             {data &&
                 <>
                     <View style={styles.headToPickupContainer}>
@@ -136,15 +132,13 @@ export default function HeadToPickup({ route, navigation }) {
                                     });
                                 }}
                             >
-                                <Text style={styles.buttonText}>Arrived</Text>
+                                <Text style={styles.buttonText}>I've arrived</Text>
                             </TouchableOpacity>
                         }
                         {data.status === "DriverIsWaiting" &&
 <<<<<<< HEAD
 
-                        <View>
-=======
->>>>>>> 097b309 (Styling changes for driver screens and adding passenger name and number to driver screen)
+                        <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity style={styles.cancelbutton} onPress={async () => {
                                 await updateDoc(ref, {
                                     status: "RiderNotHere",
@@ -157,7 +151,7 @@ export default function HeadToPickup({ route, navigation }) {
                         
                             <TouchableOpacity
                                     onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
-                                    style={styles.button}
+                                    style={styles.acceptRidebutton}
                                 >
                                 <Text style={styles.buttonText}>Go chat</Text>
                                 </TouchableOpacity>
