@@ -250,24 +250,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
     borderRadius: 15,
-    width: '45%',
-    alignItems: 'center',
-    margin: 10,
-    shadowColor: '#000', // Black color for the shadow
-    shadowOffset: { width: 0, height: 4}, // Shadow position
-    shadowOpacity: 0.2, // Shadow opacity
-    shadowRadius: 7, // Shadow blur radius
-    // Android elevation
-    elevation: 8, // This adds depth to the button on 
-  },
-  
-  cancelbutton: {
-    backgroundColor: '#FF7A7A',
-    borderColor: 'black',
-    borderWidth: 2,
-    padding: 15,
-    borderRadius: 15,
-    width: '45%',
+    width: '40%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
@@ -336,12 +319,7 @@ export const styles = StyleSheet.create({
     width: '100%'
   },
   mapDriver: {
-    top: -80,
-    height: '80%',
-    width: '100%'
-  },
-  mapDriveToDest: {
-    top: -230,
+    top: -120,
     height: '70%',
     width: '100%'
   },
