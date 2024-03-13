@@ -47,10 +47,6 @@ export default function WelcomeScreenDriver({ navigation }) {
       });
     });
     return () => unsubscribe();
-        setUserID(doc.data().user);
-      });
-    });
-    return () => unsubscribe();
   }
 
 
