@@ -152,7 +152,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
     borderRadius: 15,
-    width: '40%',
+    width: '45%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
@@ -184,7 +184,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
     borderRadius: 15,
-    width: '40%',
+    width: '45%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
@@ -200,7 +200,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
     borderRadius: 15,
-    width: '95%',
+    width: '45%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
@@ -256,7 +256,12 @@ export const styles = StyleSheet.create({
     width: '100%'
   },
   mapDriver: {
-    top: -120,
+    top: -230,
+    height: '70%',
+    width: '100%'
+  },
+  mapDriveToDest: {
+    top: -230,
     height: '70%',
     width: '100%'
   },
@@ -366,7 +371,7 @@ startTripbutton: {
   borderWidth: 2,
   padding: 15,
   borderRadius: 15,
-  width: '95%',
+  width: '97%',
   alignItems: 'center',
   margin: 10,
 },
