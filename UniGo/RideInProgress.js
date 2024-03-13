@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { db } from './firebaseConfig';
 import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import { styles } from './StyleSheet';
 import WaitingForDriverScreen from './WaitingForDriverScreen';
 import DrivingHomeScreen from './DrivingHomeScreen';
 import RideCompletedScreen from './RideCompletedScreen';
+import ChatScreen from './ChatScreen';
 // statuses: waiting -> WaitingForDriver -> DriverIsWaiting -> InTransit -> DroppedOff
 
 export default function RideInProgress({ route, navigation }) {
@@ -55,6 +56,14 @@ export default function RideInProgress({ route, navigation }) {
                     {data.status === "DriverIsWaiting" &&
                         <>
                             <Text>Driver is waiting for you</Text>
+                          
+                            <TouchableOpacity
+                                    onPress={() => navigation.navigate("ChatScreen", { rideID: rideID})}
+                                    style={styles.button}
+                        >
+                          <Text style={styles.buttonText}>Text Driver</Text>
+                        </TouchableOpacity>
+                        
                         </>
                     }
                     {data.status === "InTransit" &&
