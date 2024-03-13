@@ -76,7 +76,7 @@ export default function WelcomeScreenDriver({ navigation }) {
                 <TouchableOpacity style={styles.welcomeDriverbutton} onPress={async () => {
                   if (driverLoc && driverName) {
                     navigation.navigate('AcceptRide', {
-                      driverLoc: driverLoc, pickupLoc: pickup, destinationLoc: destination, rideID, driverName, userID
+                      driverLoc: driverLoc, pickupLoc: pickup, destinationLoc: destination, rideID, driverName, userID, userID
                     });
                   } else {
                     alert('Allow access to location');
