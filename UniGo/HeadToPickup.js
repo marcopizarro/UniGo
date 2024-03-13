@@ -138,7 +138,6 @@ export default function HeadToPickup({ route, navigation }) {
                             </TouchableOpacity>
                         }
                         {data.status === "DriverIsWaiting" &&
-<<<<<<< HEAD
 
                         <View style={{ flexDirection: 'row' }} style={{ flexDirection: 'row' }}>
                             <TouchableOpacity style={styles.cancelbutton} onPress={async () => {
