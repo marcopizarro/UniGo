@@ -60,7 +60,7 @@ export default function WaitingForDriverScreen({ uid, pickup, destination, drive
     return (
       <View style={styles.container}>
         {driverLocation && <MapView
-          style={styles.map}
+          style={styles.mapWaitingForDriverScreen}
           mapType="mutedStandard"
           initialRegion={{
             latitude: pickup.latitude,
@@ -99,11 +99,14 @@ export default function WaitingForDriverScreen({ uid, pickup, destination, drive
             />
             
         </MapView>}
-        {data && <View>
-          <Text>Driver: {data.firstName + " " + data.lastName}</Text>
-          <Text>Phone Number: {data.phoneNumber}</Text>
-          <Text>Car Type: {data.carType}</Text>
-          <Text>License Plate: {data.licensePlate}</Text>
+        {data && <View style={styles.overlayContainer}>
+        <Text style={{ color: '#003FFA', fontSize: 20, fontWeight: 'bold',  marginBottom: 15}}>Your driver is on the way!</Text>
+          <Text style={{ color: 'black', fontSize: 19, fontWeight: 'bold', marginTop: 10, marginBottom: 10, textAlign: 'left' }}> {data.firstName + " " + data.lastName}</Text>
+          <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30 }}> {data.phoneNumber}</Text>
+          <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Car Type:</Text>
+          <Text style={{ color: 'black', fontSize: 13, marginBottom: 15 }}>{data.carType}</Text>
+          <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>License Plate:</Text>
+          <Text style={{ color: 'black', fontSize: 13, marginBottom: 15 }}>{data.licensePlate}</Text>
         </View>}
       </View>
     );
