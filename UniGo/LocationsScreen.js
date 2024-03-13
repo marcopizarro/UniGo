@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { Dimensions } from 'react-native';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import Constants from 'expo-constants';
 import { GooglePlacesAutocomplete, GooglePlaceDetail } from 'react-native-google-places-autocomplete';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -166,13 +166,13 @@ export default function LocationsScreen() {
 
             useNativeAndroidPickerStyle={false} // disable the native Android style
             placeholder={{
-              label: 'Select number of passengers...',
+              label: 'Select Number of Passengers...',
               value: null,
             }}
             style={{
               inputIOS: {
-                fontSize: 17,
-                padding: 12,
+                fontSize: 15,
+                padding: 10,
                 borderWidth: 1,
                 borderColor: 'white',
                 borderRadius: 4,
@@ -181,8 +181,8 @@ export default function LocationsScreen() {
                 marginTop: 5,
               },
               inputAndroid: {
-                fontSize: 17,
-                padding: 12,
+                fontSize: 15,
+                padding: 10,
                 borderWidth: 1,
                 borderColor: 'gray',
                 borderRadius: 4,
@@ -192,6 +192,7 @@ export default function LocationsScreen() {
               },
             }}
           />
+
 
           <TouchableOpacity style={styles.button} onPress={() => {
             if (pickup && dropoff) {

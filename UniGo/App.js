@@ -7,7 +7,6 @@ import { styles } from './StyleSheet';
 import WaitingToBeMatched from './WaitingToBeMatched';
 import AreYouOk from './AreYouOk';
 import PickupScreen from './PickupScreen';
-import DestinationScreen from './DestinationScreen';
 import WelcomeScreen from './WelcomeScreen';
 import ConfirmDestScreen from './ConfirmDestScreen';
 import DrivingHomeScreen from './DrivingHomeScreen';
@@ -21,13 +20,15 @@ import HeadToPickup from './HeadToPickup'
 import RideCompleteDriver from './RideCompleteDriver'
 import DrivingToDestination from './DrivingToDestination'
 import Profile from './Profile'
+import AccountScreenUser from './AccountScreenUser';
+import AccountScreenDriver from './AccountScreenDriver';
 import ProfileButton from './ProfileButton'
 import RideInProgress from './RideInProgress';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
-import AccountScreen from './AccountScreen'; // Import your AccountScreen component
+import AccountScreen from './AccountScreenUser'; // Import your AccountScreen component
 import Loading from './Loading';
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
@@ -83,63 +84,71 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator
-           screenOptions={({ navigation }) => ({
-            headerShown: true,
-            headerBackTitleVisible: false,
-            headerTitle: () => <Text style={{ fontSize: 25, fontWeight: '800', color: '#FFF' }}>UniGo</Text>,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#003FFA',
-              height: 100,
-            },
-            headerTintColor: 'white',
-            headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('AccountScreen')}>
-                <Image
-                  source={require('./assets/account.png')} // Update the path to where your icon is located
-                  style={{ width: 30, height: 30, marginRight: 10 }} // You can adjust the size and margin as needed
-                />
-              </TouchableOpacity>
-            ),
-          })}
-          >
-            {loading ? <Stack.Screen name="Loading" component={Loading} /> : (
+        screenOptions={({ navigation }) => ({
+          headerShown: true,
+          headerBackTitleVisible: false,
+          headerTitle: () => <Text style={{ fontSize: 25, fontWeight: '800', color: '#FFF' }}>UniGo</Text>,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#003FFA',
+            height: 100,
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => {
+              if (status === 0) {
+                navigation.navigate('AccountScreenUser');
+              } else if (status === 1) {
+                navigation.navigate('AccountScreenDriver');
+              }
+            }
+            }>
+              <Image
+                source={require('./assets/account.png')}
+                style={{ width: 30, height: 30, marginRight: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
+      >
+        {loading ? <Stack.Screen name="Loading" component={Loading} /> : (
+          <>
+            {signedIn ? (
               <>
-                {signedIn ? (
+                {status === 0 ? (
                   <>
-                    {status === 0 ? (
-                      <>
-                        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-                        <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
-                        <Stack.Screen name="AreYouOk" component={AreYouOk} />
-                        <Stack.Screen name="RideInProgress" component={RideInProgress} />
-                        <Stack.Screen name="ChatScreen" component={ChatScreen} />
-
-                        <Stack.Screen name="Profile">
-                          {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
-                        </Stack.Screen>
-                      </>
-                    ) : (
-                      <>
-                        <Stack.Screen name="WelcomeScreenDriver" component={WelcomeScreenDriver} />
-                        <Stack.Screen name="AcceptRide" component={AcceptRide} />
-                        <Stack.Screen name="HeadToPickup" component={HeadToPickup} />
-                        <Stack.Screen name="ChatScreen" component={ChatScreen} />
-                        <Stack.Screen name="DrivingToDestination" component={DrivingToDestination} />
-                        <Stack.Screen name="RideCompleteDriver" component={RideCompleteDriver} />
-                        <Stack.Screen name="Profile">
-                          {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
-                        </Stack.Screen>
-                      </>
-                    )}
+                    <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+                    <Stack.Screen name="LocationsScreen" component={LocationsScreen} />
+                    <Stack.Screen name="AreYouOk" component={AreYouOk} />
+                    <Stack.Screen name="RideInProgress" component={RideInProgress} />
+                    <Stack.Screen name="AccountScreenUser" component={AccountScreenUser} />
+                    <Stack.Screen name="ChatScreen" component={ChatScreen} />
+                    <Stack.Screen name="Profile">
+                      {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
+                    </Stack.Screen>
                   </>
                 ) : (
-                  <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                  <>
+                    <Stack.Screen name="WelcomeScreenDriver" component={WelcomeScreenDriver} />
+                    <Stack.Screen name="AcceptRide" component={AcceptRide} />
+                    <Stack.Screen name="HeadToPickup" component={HeadToPickup} />
+                    <Stack.Screen name="ChatScreen" component={ChatScreen} />
+                    <Stack.Screen name="DrivingToDestination" component={DrivingToDestination} />
+                    <Stack.Screen name="RideCompleteDriver" component={RideCompleteDriver} />
+                    <Stack.Screen name="AccountScreenDriver" component={AccountScreenDriver} />
+                    <Stack.Screen name="Profile">
+                      {(props) => <Profile handleSignOut={handleSignOut} {...props} />}
+                    </Stack.Screen>
+                  </>
                 )}
               </>
+            ) : (
+              <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             )}
-          </Stack.Navigator>
-        </NavigationContainer>
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
 
   );
 }
