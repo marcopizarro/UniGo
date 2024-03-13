@@ -119,7 +119,11 @@ export default function HeadToPickup({ route, navigation }) {
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
             <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -120, textAlign: 'left' }}>{firstName} {lastName}</Text>
+<<<<<<< HEAD
             <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}> {number}</Text>
+=======
+            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
+>>>>>>> 097b309 (Styling changes for driver screens and adding passenger name and number to driver screen)
             {data &&
                 <>
                     <View style={styles.headToPickupContainer}>
@@ -136,8 +140,11 @@ export default function HeadToPickup({ route, navigation }) {
                             </TouchableOpacity>
                         }
                         {data.status === "DriverIsWaiting" &&
+<<<<<<< HEAD
 
                         <View>
+=======
+>>>>>>> 097b309 (Styling changes for driver screens and adding passenger name and number to driver screen)
                             <TouchableOpacity style={styles.cancelbutton} onPress={async () => {
                                 await updateDoc(ref, {
                                     status: "RiderNotHere",
