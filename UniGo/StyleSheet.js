@@ -126,9 +126,9 @@ export const styles = StyleSheet.create({
   elevation: 8, // This adds depth to the button on 
   },
   welcomeDriverbutton: {
-    backgroundColor: '#95A2F1',
-    borderColor: '#95A2F1',
-    borderWidth: 1,
+    backgroundColor: '#D6E4FF',
+    borderColor: 'black',
+    borderWidth: 2,
     padding: 15,
     borderRadius: 15,
     width: '70%',
@@ -142,9 +142,9 @@ export const styles = StyleSheet.create({
     elevation: 8, // This adds depth to the button on 
   },
   acceptRidebutton: {
-    backgroundColor: '#95A2F1',
-    borderColor: '#95A2F1',
-    borderWidth: 1,
+    backgroundColor: '#D6E4FF',
+    borderColor: 'black',
+    borderWidth: 2,
     padding: 15,
     borderRadius: 15,
     width: '40%',
@@ -157,13 +157,45 @@ export const styles = StyleSheet.create({
     // Android elevation
     elevation: 8, // This adds depth to the button on 
   },
+  arrivedbutton: {
+    backgroundColor: '#D6E4FF',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
   declinebutton: {
     backgroundColor: '#D22B2B',
-    borderColor: '#D22B2B',
-    borderWidth: 1,
+    borderColor: 'black',
+    borderWidth: 2,
     padding: 15,
     borderRadius: 15,
     width: '40%',
+    alignItems: 'center',
+    margin: 10,
+    shadowColor: '#000', // Black color for the shadow
+    shadowOffset: { width: 0, height: 4}, // Shadow position
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 7, // Shadow blur radius
+    // Android elevation
+    elevation: 8, // This adds depth to the button on 
+  },
+  cancelbutton: {
+    backgroundColor: '#D22B2B',
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 15,
+    width: '95%',
     alignItems: 'center',
     margin: 10,
     shadowColor: '#000', // Black color for the shadow
@@ -214,7 +246,7 @@ export const styles = StyleSheet.create({
     width: '100%'
   },
   mapAcceptRide: {
-    top: -80,
+    top: -65,
     height: '60%',
     width: '100%'
   },
@@ -309,9 +341,9 @@ startTripContainer: {
   width: '90%',
 },
 startTripbutton: {
-  backgroundColor: '#746CC7',
+  backgroundColor: '#D6E4FF',
   borderColor: 'black',
-  borderWidth: 1,
+  borderWidth: 2,
   padding: 15,
   borderRadius: 15,
   width: '95%',

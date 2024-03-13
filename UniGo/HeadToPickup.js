@@ -10,7 +10,7 @@ import { onSnapshot, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export default function HeadToPickup({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc, destinationName, rideID, driverName } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, destinationName, rideID, driverName, firstName, lastName, number } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [driverPosition, setDriverPosition] = useState(driverLoc);
     const [data, setData] = useState(null);
@@ -76,7 +76,7 @@ export default function HeadToPickup({ route, navigation }) {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
             <MapView
                 style={styles.mapDriver}
                 mapType="mutedStandard"
@@ -117,23 +117,25 @@ export default function HeadToPickup({ route, navigation }) {
 
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
+            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -120, textAlign: 'left' }}>{firstName} {lastName}</Text>
+            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
             {data &&
                 <>
                     <View style={styles.headToPickupContainer}>
                         {data.status !== "DriverIsWaiting" &&
                             <TouchableOpacity
-                                style={styles.acceptRidebutton}
+                                style={styles.arrivedbutton}
                                 onPress={async () => {
                                     await updateDoc(ref, {
                                         status: "DriverIsWaiting",
                                     });
                                 }}
                             >
-                                <Text style={styles.submitButtonText}>Arrived</Text>
+                                <Text style={styles.buttonText}>Arrived</Text>
                             </TouchableOpacity>
                         }
                         {data.status === "DriverIsWaiting" &&
-                            <TouchableOpacity style={styles.declinebutton} onPress={async () => {
+                            <TouchableOpacity style={styles.cancelbutton} onPress={async () => {
                                 await updateDoc(ref, {
                                     status: "RiderNotHere",
                                 });
@@ -157,10 +159,12 @@ export default function HeadToPickup({ route, navigation }) {
                                     destinationLoc: destinationLoc,
                                     rideID,
                                     driverName,
+                                    firstName,
+                                    lastName,
                                 });
                             }}
                         >
-                            <Text style={styles.submitButtonText}>Start Trip</Text>
+                            <Text style={styles.buttonText}>Start Trip</Text>
                         </TouchableOpacity>
                     </View>
 }

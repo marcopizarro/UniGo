@@ -16,6 +16,7 @@ export default function WelcomeScreenDriver({ navigation }) {
   const [pickup, setPickup] = useState('');
   const [destination, setDestination] = useState('');
   const [rideID, setRideID] = useState(0);
+  const [userID, setUserID] = useState();
   const [noRider, setNoRider] = useState(true);
   const driverName = "driver1"; // TODO pull from db
 
@@ -43,6 +44,7 @@ export default function WelcomeScreenDriver({ navigation }) {
         setPickup(doc.data().pickupLoc);
         setDestination(doc.data().destinationLoc);
         setNoRider(false);
+        setUserID(doc.data().user)
       }
     });
   }
@@ -61,24 +63,24 @@ export default function WelcomeScreenDriver({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
       {
         !(driverLoc && pickup && destination && rideID && driverName) ?
           <ActivityIndicator size="large" color="#95A2F1" />
           : (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: '#736CC1', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>UniGo Driver</Text>
+              <Text style={{ color: '#167DEB', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>UniGo Driver</Text>
               {noRider ? <Text>No Riders to Pick Up</Text> : (
                 <TouchableOpacity style={styles.welcomeDriverbutton} onPress={async () => {
                   if (driverLoc && pickup && destination && rideID && driverName) {
                     navigation.navigate('AcceptRide', {
-                      driverLoc: driverLoc, pickupLoc: pickup, destinationLoc: destination, rideID, driverName
+                      driverLoc: driverLoc, pickupLoc: pickup, destinationLoc: destination, rideID, driverName, userID
                     });
                   } else {
                     alert('Allow access to location');
                   }
                 }}>
-                  <Text style={styles.submitButtonText}>Get A New Rider</Text>
+                  <Text style={styles.buttonText}>Get A New Rider</Text>
                 </TouchableOpacity>
               )}
             </View>
