@@ -40,6 +40,8 @@ export default function LocationsScreen() {
     console.log('Dropoff', { dropoff });
   };
 
+  
+
   /*Obtain user's current location*/
   useEffect(() => {
     (async () => {
@@ -58,6 +60,15 @@ export default function LocationsScreen() {
     })();
   }, []);
 
+    /*Padding stuff for the zoom in to final route*/
+    const edgePaddingValue = 10;
+    const edgePadding = {
+      top: edgePaddingValue,
+      right: edgePaddingValue,
+      bottom: edgePaddingValue,
+      left: edgePaddingValue
+    };
+
   /*After setting the pickup and/or dropoff location move to the location*/
   const moveTo = async (position) => {
     const camera = await mapRef.current?.getCamera();
@@ -66,6 +77,7 @@ export default function LocationsScreen() {
       mapRef.current?.animateCamera(camera, { duration: 1000 });
     }
   };
+  
 
   /*After selecting the pickup location, set the 
   pickup coordinates and move to the location*/
@@ -78,6 +90,21 @@ export default function LocationsScreen() {
     };
     setPickup(position);
     moveTo(position);
+
+    if (position && dropoff) {
+      const maxLatitude = Math.max(pickup.latitude, position.latitude);
+      const minLatitude = Math.min(pickup.latitude, position.latitude);
+      const maxLongitude = Math.max(pickup.longitude, position.longitude);
+      const minLongitude = Math.min(pickup.longitude, position.longitude);
+
+      mapRef.current?.fitToCoordinates([
+        { latitude: maxLatitude, longitude: maxLongitude }, 
+        { latitude: maxLatitude, longitude: minLongitude }, 
+        { latitude: minLatitude, longitude: maxLongitude },
+        { latitude: minLatitude, longitude: minLongitude }, 
+      ], {edgePadding: edgePadding});
+    }
+    
   };
 
   /*After selecting the dropoff location, set the 
@@ -90,24 +117,31 @@ export default function LocationsScreen() {
       longitude: details?.geometry.location.lng,
     };
     setDropoff(position);
-    moveTo(position);
+    
+
+    if (pickup && position) {
+      const maxLatitude = Math.max(pickup.latitude, position.latitude);
+      const minLatitude = Math.min(pickup.latitude, position.latitude);
+      const maxLongitude = Math.max(pickup.longitude, position.longitude);
+      const minLongitude = Math.min(pickup.longitude, position.longitude);
+
+      mapRef.current?.fitToCoordinates([
+        { latitude: maxLatitude, longitude: maxLongitude }, 
+        { latitude: maxLatitude, longitude: minLongitude }, 
+        { latitude: minLatitude, longitude: maxLongitude },
+        { latitude: minLatitude, longitude: minLongitude }, 
+      ], {edgePadding: edgePadding});
+    }
+
   };
 
-  /*Padding stuff for the zoom in to final route*/
-  const edgePaddingValue = 130;
-  const edgePadding = {
-    top: edgePaddingValue,
-    right: edgePaddingValue,
-    bottom: edgePaddingValue,
-    left: edgePaddingValue
-  };
 
   /*Trace the route after the traceroute button is pressed and zoom accordingly
   to the final route */
-  const traceRoute = () => {
-    if (pickup && dropoff) {
-      setShowDirections(true);
-      mapRef.current?.fitToCoordinates([pickup, dropoff], { edgePadding })
+  const traceRoute = (details) => {
+    onPlaceSelectedPickup(details);
+    if (pickup && details) {
+      mapRef.current?.fitToCoordinates([pickup, details], { edgePadding })
     }
   };
 
@@ -142,7 +176,7 @@ export default function LocationsScreen() {
               language: 'en', // language of the results
             }}
             fetchDetails
-            onPress={(data, details = null) => onPlaceSelectedPickup(details)}
+            onPress={(data, details = null) => [onPlaceSelectedPickup(details) , traceRoute(details)]}
             predefinedPlaces={[currentLocation]}
           />
           <GooglePlacesAutocomplete
