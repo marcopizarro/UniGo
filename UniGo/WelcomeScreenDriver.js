@@ -71,8 +71,8 @@ export default function WelcomeScreenDriver({ navigation }) {
           <ActivityIndicator size="large" color="#95A2F1" />
           : (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: '#167DEB', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>UniGo Driver</Text>
-              {noRider ? <Text>No Riders to Pick Up</Text> : (
+              <Text style={{ color: '#003FFA', fontSize: 40, fontWeight: 'bold', marginBottom: 80 }}>UniGo Driver</Text>
+              {noRider ? <Text style={{fontWeight: 'bold', fontSize: 17}}>No Riders to Pick Up...</Text> : (
                 <TouchableOpacity style={styles.welcomeDriverbutton} onPress={async () => {
                   if (driverLoc && driverName) {
                     navigation.navigate('AcceptRide', {

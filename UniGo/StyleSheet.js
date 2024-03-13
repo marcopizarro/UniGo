@@ -217,9 +217,21 @@ export const styles = StyleSheet.create({
   sedanIcon: {
     width: 50,
     height: 50,
-    tintColor: '#95A2F1'
+    tintColor: '#003FFA'
   },
-
+  overlayContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    padding: 20,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 5,
+},
   selectedButton: {
     backgroundColor: '#003FFA', //darker
     borderColor: 'black',
@@ -251,8 +263,8 @@ export const styles = StyleSheet.create({
     width: '100%'
   },
   mapAcceptRide: {
-    top: -65,
-    height: '60%',
+    top: -130,
+    height: '70%',
     width: '100%'
   },
   mapDriver: {
