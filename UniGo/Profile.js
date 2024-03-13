@@ -4,7 +4,7 @@ import { styles } from './StyleSheet';
 
 export default function Profile(props) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
       <Text style={{ color: '#736CC1', fontSize: 25, fontWeight: 'bold', marginBottom: 80 }}>Profile info here.</Text>
       <StatusBar style="auto" />
 

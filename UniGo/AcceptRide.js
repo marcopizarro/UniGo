@@ -13,12 +13,15 @@ import { db } from "./firebaseConfig";
 
 
 export default function AcceptRide({ route, navigation }) {
-    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName } = route.params;
+    const { driverLoc, pickupLoc, destinationLoc, rideID, driverName, userID } = route.params;
     const [coordinates, setCoordinates] = useState([]);
     const [pickupName, setPickupName] = useState('');
     const [destinationName, setDestinationName] = useState('');
     const [data, setData] = useState(null);
     const [ref, setRef] = useState(null);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [number, setNumber] = useState('');
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "rideRequests", rideID), (doc) => {
@@ -34,8 +37,14 @@ export default function AcceptRide({ route, navigation }) {
             }
         });
 
+       
+
         return () => unsub();
     }, []);
+
+    // const getInfo = asynch (rideID) => {
+
+    // }
 
     const getPlaceName = async (pickupLatitude, pickupLongitude, destinationLatitude, destinationLongitude) => {
         console.log(pickupLatitude);
@@ -84,6 +93,33 @@ export default function AcceptRide({ route, navigation }) {
     };
 
 
+    const userInfo = async () => {
+        console.log('USER ID')
+        console.log(userID)
+        const usersDocRef = doc(db, "users", userID);
+        console.log('USER ID')
+        try {
+        const docSnap = await getDoc(usersDocRef);
+        if (docSnap.exists()) {
+            // Retrieve the data from the document
+            const userData = docSnap.data();
+            // Now you can work with userData, it contains the document data
+            console.log('USER DATA!!')
+            console.log(userData);
+            console.log('DATA ABOVE!!!!')
+            setFirstName(userData.firstName)
+            setLastName(userData.lastName)
+            setNumber(userData.phoneNumber)
+        } else {
+            console.log('Document does not exist');
+        }
+        } catch (error) {
+        console.error('Error getting document:', error);
+        }
+
+    }
+
+
 
     // Function to fetch route coordinates
     const fetchRouteCoordinates = async () => {
@@ -107,10 +143,11 @@ export default function AcceptRide({ route, navigation }) {
     useEffect(() => {
         fetchRouteCoordinates();
         getPlaceName(pickupLoc.latitude, pickupLoc.longitude, destinationLoc.latitude, destinationLoc.longitude);
+        userInfo();
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffff' }}>
             <MapView
                 style={styles.mapAcceptRide}
                 mapType="mutedStandard"
@@ -151,9 +188,11 @@ export default function AcceptRide({ route, navigation }) {
 
             {/* ProfileButton component added to the header
             <ProfileButton navigation={navigation} /> */}
+            <Text style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 25, marginTop: -20, textAlign: 'left' }}>{firstName} {lastName}</Text>
+            <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', marginBottom: 30, marginTop: -20 }}>phone number: {number}</Text>
 
-            <Text style={{ color: '#736CC1', fontSize: 15, fontWeight: 'bold', marginBottom: 50, marginTop: -20 }}>Pick up at {pickupName.name}</Text>
-            <Text style={{ color: '#736CC1', fontSize: 15, fontWeight: 'bold', marginBottom: 50 }}>Drop off at {destinationName.name}</Text>
+            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 15, marginTop: -20 }}>Pick up at {pickupName.name}</Text>
+            <Text style={{ color: '#167DEB', fontSize: 15, fontWeight: 'bold', marginBottom: 50 }}>Drop off at {destinationName.name}</Text>
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
@@ -173,10 +212,13 @@ export default function AcceptRide({ route, navigation }) {
                             destinationName: destinationName,
                             rideID: rideID,
                             driverName: driverName,
+                            firstName,
+                            lastName,
+                            number
                         });
                     }}
                 >
-                    <Text style={styles.submitButtonText}>Accept</Text>
+                    <Text style={styles.buttonText}>Accept</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.declinebutton} onPress={() => navigation.navigate('WelcomeScreenDriver')}>
                     <Text style={styles.submitButtonText}>Decline</Text>
