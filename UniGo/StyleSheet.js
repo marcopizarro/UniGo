@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 // AppStyles.js
 import { StyleSheet } from 'react-native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
@@ -425,4 +424,3 @@ startTripbutton: {
 
 
 });
->>>>>>> da12b28 (Correcting position of driver side buttons)
