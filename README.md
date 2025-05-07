@@ -18,7 +18,7 @@ UniGo is a mobile ride-sharing application designed to enhance the 5SURE campus 
 ## Impact  
 The traditional 5SURE service at Stanford currently relies on walkie-talkies and spreadsheets for coordination, leading to long waiting times and communication gaps. UniGo modernizes the system by integrating real-time messaging, location tracking, and automated ride matching, offering a faster, more reliable, and safer ride-sharing experience.  
 
-#Screenshots
+# Screenshots
 ![UNIGO (1)](https://github.com/user-attachments/assets/1bf579e4-1557-43de-aadd-4d48e3d17943)
 ![UNIGO (2)](https://github.com/user-attachments/assets/4671acba-b81e-41ad-a007-e097d42ffcda)
 ![UNIGO (3)](https://github.com/user-attachments/assets/187a54f9-cf92-4e61-8d7f-0daa52d03772)
